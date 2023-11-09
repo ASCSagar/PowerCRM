@@ -95,7 +95,7 @@ const Quote = () => {
       <NeumorphismWrapper>
         {renderColBtns()}
         <div className="text-right mb-3">
-          <Link to="/quotes/add" className="btn btn-primary">
+          <Link to="/quotes/add" className="btn" style={{backgroundColor:"#0097b2"}}>
             Add Quote
           </Link>
         </div>

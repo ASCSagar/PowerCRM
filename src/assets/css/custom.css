@@ -8,6 +8,7 @@
   /* --primary: #0097b2; */
 }
 
+
 .selectbox .select-search-container {
   width: 100%;
 }
@@ -418,7 +419,7 @@ p.nav-link {
 /* for footer fixed  */
 .fixed-footer {
   position: fixed;
-  /* background-color: #4361ee; */
+  /* background-color: #0097b2; */
   bottom: 40px;
   right: 40px;
   cursor: pointer;
@@ -459,7 +460,7 @@ p.nav-link {
 .dropdown:not(.custom-dropdown-icon):not(.custom-dropdown)
   .dropdown-menu
   a.dropdown-item:hover {
-  color: #4361ee;
+  color: #0097b2;
 }
 .dropdown-menu[data-bs-popper] {
   left: unset;
@@ -496,6 +497,7 @@ p.nav-link {
 }
 .neumorphism-box.nmb {
   margin-bottom: 20px;
+  margin-left: 90px;
 }
 .neumorphism-box.p50 {
   padding: 50px;
@@ -842,41 +844,12 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
   background-color: rgb(255, 255, 255) !important;
 }
-
-.gridContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 20px;
+.power-crm-text {
+  font-family: cursive; 
+  font-size: 18px;
+  font-weight: bold; 
+  color: #333; 
 }
-
-.cardWrapperMain {
-  background-color: #fafbfe ;  
-  border: 1px solid #0097b2; 
-  border-radius: 8px;
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-} 
-
-.cardHeader  {
-  background-color: #0097b2;
-  color: #fafbfe;
-  font-weight: 400;
-  padding: 10px;
-  border-radius: 8px 8px 0 0;
-}
-
-.cardBody {
-  padding: 10px;
-}
-
-.itemLabel {
-  font-weight: bold;
-  color: #333;
-  display: inline-block;
-}
-
-@media (max-width: 768px) {
-  .gridContainer {
-    grid-template-columns: 1fr;
-  }
+.loginlogo {
+  background-color: white;
 }

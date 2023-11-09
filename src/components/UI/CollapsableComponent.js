@@ -29,7 +29,6 @@ function CollapsableComponent(props) {
             stroke-linejoin="round"
             className="feather feather-chevron-right"
           >
-            <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
         </div>
       </a>

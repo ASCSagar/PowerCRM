@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import NeumorphismWrapper from "../../components/UI/Layouts/NeumorphismWrapper";
-import { Tab, Tabs } from "react-bootstrap";
+import { Tab, Table, Tabs } from "react-bootstrap";
 import { quoteColumns } from "../Quotes";
 import useDTColumns from "../../hooks/useDTColumns";
-import DTable from "../../components/DTable";
+import DTable from "../../components/DTable"; 
 import { DTableFunction } from ".";
-import SupplyDetails from "../../components/Supplt Details/SupplyDetails";
 
 const DashboardSite = () => {
   const [key, setKey] = useState(0);
   const [siteData, setSiteData] = useState();
   const [refreshTable, setRefreshTable] = useState(true);
   const [cols, setCols, changeCols, renderColBtns] = useDTColumns(quoteColumns);
+
 
   const [
     companyGETData,
@@ -46,162 +46,6 @@ const DashboardSite = () => {
     }
   }, [paramsId, responseGetcompanyData]);
 
-  const siteInfoCards = [
-    {
-      title: "Site Information",
-      data: [
-        { label: "Group Name", value: siteData?.group_name },
-        { label: "Company Name", value: siteData?.contacts?.company },
-        { label: "Type Of Owner", value: siteData?.type_of_owner },
-        { label: "Owner Name", value: siteData?.owner_name },
-        {
-          label: "Current Gas And Electricity Supplier Details",
-          value: siteData?.current_gas_and_electricity_supplier_details,
-        },
-        { label: "Tenant", value: siteData?.tenant ? "Yes" : "No" },
-        { label: "Vacant", value: siteData?.vacant ? "Yes" : "No" },
-        {
-          label: "Change Of Tenancy",
-          value: siteData?.change_of_tenancy ? "Yes" : "No",
-        },
-      ],
-    },
-    {
-      title: "Our Details",
-      data: [
-        {
-          label: "Site Reference",
-          value: siteData?.site_reference,
-        },
-        {
-          label: "Support Contact",
-          value: siteData?.support_contact,
-        },
-        {
-          label: "Lead Source",
-          value: siteData?.lead_source,
-        },
-        {
-          label: "Notes",
-          value: siteData?.notes,
-        },
-        {
-          label: "Lead Type",
-          value: siteData?.lead_type,
-        },
-        { label: "Bill To Sent", value: siteData?.bill_to_sent ? "Yes" : "No" },
-        {
-          label: "Welcome Letter Sent",
-          value: siteData?.welcome_letter_send ? "Yes" : "No",
-        },
-      ],
-    },
-    {
-      title: "Letter Of Authority",
-      data: [
-        {
-          label: "Agent Email",
-          value: siteData?.agent_email,
-        },
-        {
-          label: "LOA Header To Use",
-          value: siteData?.loa_header_to_use,
-        },
-        {
-          label: "LOA Template",
-          value: siteData?.loa_template,
-        },
-      ],
-    },
-    {
-      title: "Site Address",
-      data: [
-        {
-          label: "Address Line 1",
-          value: siteData?.site_address?.addressline1,
-        },
-        {
-          label: "Address Line 2",
-          value: siteData?.site_address?.addressline2,
-        },
-        {
-          label: "Address Line 3",
-          value: siteData?.site_address?.addressline3,
-        },
-        {
-          label: "Address Line 4",
-          value: siteData?.site_address?.addressline4,
-        },
-        {
-          label: "Postcode",
-          value: siteData?.site_address?.postcode,
-        },
-        {
-          label: "Country",
-          value: siteData?.site_address?.country,
-        },
-      ],
-    },
-    {
-      title: "Billing Address",
-      data: [
-        {
-          label: "Address Line 1",
-          value: siteData?.billing_address?.addressline1,
-        },
-        {
-          label: "Address Line 2",
-          value: siteData?.billing_address?.addressline2,
-        },
-        {
-          label: "Address Line 3",
-          value: siteData?.billing_address?.addressline3,
-        },
-        {
-          label: "Address Line 4",
-          value: siteData?.billing_address?.addressline4,
-        },
-        {
-          label: "Postcode",
-          value: siteData?.billing_address?.postcode,
-        },
-        {
-          label: "Country",
-          value: siteData?.billing_address?.country,
-        },
-      ],
-    },
-    {
-      title: "Contact",
-      data: [
-        {
-          label: "First Name",
-          value: siteData?.contacts?.first_name,
-        },
-        {
-          label: "Last Name",
-          value: siteData?.contacts?.last_name,
-        },
-        {
-          label: "Contact Title",
-          value: siteData?.contacts?.contact_title,
-        },
-        {
-          label: "Position",
-          value: siteData?.contacts?.position,
-        },
-        {
-          label: "Telephone Number",
-          value: siteData?.contacts?.telephone_number,
-        },
-        {
-          label: "Email",
-          value: siteData?.contacts?.email,
-        },
-      ],
-    },
-  ];
-
   return (
     <>
       <NeumorphismWrapper>
@@ -216,37 +60,116 @@ const DashboardSite = () => {
             className="mb-3"
           >
             <Tab eventKey={0} title="Site">
-              <div className="gridContainer">
-                {siteInfoCards.map((card, index) => (
-                  <div className="cardWrapperMain" key={index}>
-                    <div className="cardHeader">{card.title}</div>
-                    <div className="cardBody">
-                      {card.data.map((item, itemIndex) => (
-                        <p key={itemIndex}>
-                          <span className="itemLabel">{item.label} : </span>{" "}
-                          {item.value}
-                        </p>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <Table>
+                <tr>
+                  <th>Site Information</th>
+                  <td>Group Name : {siteData?.group_name}</td>
+                  <td>Company Name : {siteData?.contacts?.company}</td>
+                  <td>Type Of Owner : {siteData?.type_of_owner}</td>
+                  <td>Owner Name : {siteData?.owner_name}</td>
+                  <td>
+                    Current Gas And Electricity Supplier Details :{' '}
+                    {siteData?.current_gas_and_electricity_supplier_details}
+                  </td>
+                  <td>Tenant : {siteData?.tenant ? "Yes" : "No"}</td>
+                  <td>Vacant : {siteData?.vacant ? "Yes" : "No"}</td>
+                  <td>
+                    Change Of Tenancy :{" "}
+                    {siteData?.change_of_tenancy ? "Yes" : "No"}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Our Details</th>
+                  <td>Site Reference : {siteData?.site_reference}</td>
+                  <td>Support Contact : {siteData?.support_contact}</td>
+                  <td>Lead Source : {siteData?.lead_source}</td>
+                  <td>Notes : {siteData?.notes}</td>
+                  <td>Lead Type : {siteData?.lead_type}</td>
+                  <td>
+                    Bill To Sent : {siteData?.bill_to_sent ? "Yes" : "No"}
+                  </td>
+                  <td>
+                    Welcome Letter Sent :{" "}
+                    {siteData?.welcome_letter_send ? "Yes" : "No"}
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>Letter Of Authority</th>
+                  <td>Agent Email : {siteData?.agent_email}</td>
+                  <td>LOA Header To Use : {siteData?.loa_header_to_use}</td>
+                  <td>LOA Template : {siteData?.loa_template}</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>Site Address</th>
+                  <td>
+                    Address Line 1 : {siteData?.site_address?.addressline1}
+                  </td>
+                  <td>
+                    Address Line 2 : {siteData?.site_address?.addressline2}
+                  </td>
+                  <td>
+                    Address Line 3 : {siteData?.site_address?.addressline3}
+                  </td>
+                  <td>
+                    Address Line 4 : {siteData?.site_address?.addressline4}
+                  </td>
+                  <td>Postcode : {siteData?.site_address?.postcode}</td>
+                  <td>Country : {siteData?.site_address?.country}</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>  
+                  <th>Billing Address</th>
+                  <td>
+                    Address Line 1 : {siteData?.billing_address?.addressline1}
+                  </td>
+                  <td>
+                    Address Line 2 : {siteData?.billing_address?.addressline2}
+                  </td>
+                  <td>
+                    Address Line 3 : {siteData?.billing_address?.addressline3}
+                  </td>
+                  <td>
+                    Address Line 4 : {siteData?.billing_address?.addressline4}
+                  </td>
+                  <td>Postcode : {siteData?.billing_address?.postcode}</td> 
+                  <td>Country : {siteData?.billing_address?.country}</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>  
+                  <th>Contact</th>
+                  <td>First Name : {siteData?.contacts?.first_name}</td>
+                  <td>Last Name : {siteData?.contacts?.last_name}</td>
+                  <td>Contact Title : {siteData?.contacts?.contact_title}</td>
+                  <td>Position : {siteData?.contacts?.position}</td>
+                  <td>
+                    Telephone Number : {siteData?.contacts?.telephone_number}
+                  </td>
+                  <td>Email : {siteData?.contacts?.email}</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </Table>
             </Tab>
             <Tab eventKey={1} title="Quotes">
               <div>
                 {renderColBtns()}
                 <DTable
-                  url={`quote/generate-quote/?site=${paramsId}`}
+                  url={`quote/generate-quote/?site=${paramsId}`} 
                   transformFunction={DTableFunction}
                   columns={cols}
                   refreshTable={refreshTable}
                   setRefreshTable={setRefreshTable}
                 />
               </div>
-            </Tab>
-            <Tab eventKey={2} title="Supply Details">
-              <SupplyDetails />
-            </Tab>
+            </Tab>  
           </Tabs>
         </div>
       </NeumorphismWrapper>

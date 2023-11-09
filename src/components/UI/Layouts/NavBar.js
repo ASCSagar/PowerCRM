@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { authAction } from "../../../store/authStore";
 import { deleteFromLocalStorage } from "../../../helpers/helperFunctions";
 import { Button, Nav, Navbar } from "react-bootstrap";
+import logoimg from "../../../assets/img/powercrm.jpeg";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -29,9 +30,20 @@ const NavBar = () => {
     <>
       <nav className="navbar navbar-expand-lg navbar-transparent navbar-light shadow-inset rounded navbar-theme-primary">
         <div className="container-fluid position-relative">
+          {/* <Navbar className="justify-content-end">
+            <Navbar.Brand as={NavLink} to="/" className="">
+             <img src={logoimg}  alt="logo"/> PowerCRM
+            </Navbar.Brand>
+          </Navbar> */}
           <Navbar className="justify-content-end">
             <Navbar.Brand as={NavLink} to="/" className="">
-              PowerCRM
+              <img
+                src={logoimg}
+                alt="logo"
+                style={{ width: "60px", height: "auto", marginRight: "10px" }}
+                className="logo-img"
+              />
+             <span className="power-crm-text">PowerCRM</span>
             </Navbar.Brand>
           </Navbar>
           <div className="navbar-collapse collapse" id="navbar-dark-signin">
@@ -82,7 +94,7 @@ const NavBar = () => {
                 </Nav.Link>
               </Nav>
             </Navbar>
-            <Nav.Link as={Button} onClick={logout}>
+            <Nav.Link as={Button} onClick={logout} class="btn btn-primary" style={{width:"85px",height:"35px"}}>
               Logout
             </Nav.Link>
           </div>
