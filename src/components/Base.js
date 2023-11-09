@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import useIsLoggedIn from "../hooks/useIsLoggedIn";
 import Header from "./UI/Layouts/Header";
 import Notification from "./UI/Notification";
 import Shortcuts from "./General/Shortcuts";
 import NavBar from "./UI/Layouts/NavBar";
+import Sidebar from "../components/Sidebar";
 
-const Base = () => {
+function Base() {
   const isLoggedIn = useIsLoggedIn();
 
   const navigate = useNavigate();
@@ -14,9 +15,9 @@ const Base = () => {
     if (!isLoggedIn) {
       navigate("/login");
     }
-  }, [isLoggedIn, navigate]);
+  }, [isLoggedIn]);
 
-  const sideBarStatus = false;
+  const [sideBarStatus, setSideBarStatus] = useState(false);
 
   return (
     <>
@@ -31,15 +32,22 @@ const Base = () => {
       >
         <div className="container-fluid mt-3">
           <div className="row">
-            <Header />
-            <Outlet />
-            <Shortcuts />
+            <div className="col-2" style={{marginTop:"-104px"}}>
+              <Sidebar />
+            </div>
+            <div className="col-10">
+              <div>
+              <Header />
+              </div>
+              <Outlet />
+              <Shortcuts />
+            </div>
           </div>
         </div>
       </div>
       <Notification />
     </>
   );
-};
+}
 
 export default Base;

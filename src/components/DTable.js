@@ -9,7 +9,6 @@ function DTable(props) {
   const [pageNo, setPageNo] = useState(1);
   const [perPage, setPerPage] = useState(10);
   const [totalRows, setTotalRows] = useState(0);
-
   const currentPath = useLocation().pathname;
 
   const [

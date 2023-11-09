@@ -31,7 +31,7 @@ const Header = (props) => {
           </div>
           {location === "/group-quotes" ? (
             <div className="text-right mb-3">
-              <Link to="/group-quotes/add" className="btn btn-primary">
+              <Link to="/group-quotes/add" className="btn" style={{backgroundColor:"#0097b2"}}>
                 Add Group Quotes
               </Link>
             </div>

@@ -121,7 +121,7 @@
 .widget-card-four .progress-bar.bg-gradient-secondary {
   position: relative;
   background-color: #fc5296;
-  background-image: linear-gradient(315deg, #805dca 0%, #4361ee 74%);
+  background-image: linear-gradient(315deg, #805dca 0%, #0097b2 74%);
 }
 .widget-card-four .progress-bar:before {
   content: "";
@@ -341,8 +341,8 @@
   width: 32px;
 }
 .widget.widget-activity-five .timeline-line .item-timeline .t-dot div.t-primary {
-  background-color: #4361ee;
-  box-shadow: 0 10px 20px -8px #4361ee;
+  background-color: #0097b2;
+  box-shadow: 0 10px 20px -8px #0097b2;
 }
 .widget.widget-activity-five .timeline-line .item-timeline .t-dot div.t-primary svg {
   color: #e0e6ed;
@@ -493,7 +493,7 @@
   border-bottom-right-radius: 8px;
 }
 .widget-one_hybrid.widget-followers .widget-heading .w-icon {
-  color: #4361ee;
+  color: #0097b2;
   background: #eceffe;
 }
 .widget-one_hybrid.widget-referral .widget-heading .w-icon {
@@ -502,7 +502,7 @@
 }
 .widget-one_hybrid.widget-social {
   background: #e6f4ff;
-  background: #4361ee;
+  background: #0097b2;
 }
 .widget-one_hybrid.widget-social .widget-heading .w-icon {
   color: #2196f3;
@@ -766,7 +766,7 @@
   display: flex;
   justify-content: space-between;
   margin-top: 82px;
-  align-items: end;
+  align-items: flex-end;
 }
 .widget.widget-card-five .account-box .card-bottom-section p svg {
   width: 15px;
@@ -850,7 +850,7 @@
   background: #fcf5e9;
 }
 .widget-four .widget-content .browser-list:nth-child(1) .w-icon svg {
-  color: #4361ee;
+  color: #0097b2;
 }
 .widget-four .widget-content .browser-list:nth-child(2) .w-icon svg {
   color: #e7515a;
@@ -978,7 +978,7 @@
 .widget-card-two .card-bottom-section a {
   display: block;
   margin-top: 18px;
-  background: #4361ee;
+  background: #0097b2;
   color: #fff;
   padding: 10px 10px;
   transform: none;

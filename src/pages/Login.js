@@ -9,6 +9,7 @@ import { Form } from "react-bootstrap";
 import useFetch from "../hooks/useFetch";
 import { uiAction } from "../store/uiStore";
 import { authAction } from "../store/authStore";
+import logologin from '../assets/img/powercrm.jpeg';
 
 const InitialState = {
   userName: "",
@@ -145,7 +146,8 @@ function Login() {
           <div className="container mx-auto align-self-center">
             <div className="row ">
               <div className="col-md-12 col-12 d-flex flex-row align-self-center mx-auto flexCols">
-                <div className="text-center">
+                <div className="text-center loginlogo" >
+                  <img src={logologin}  alt="logo"/>
                   <h1>PowerCRM</h1>
                 </div>
                 <div className="card mt-3 mb-3 neumorphism-box nmb">
@@ -197,7 +199,8 @@ function Login() {
                             <div className="col-12">
                               <Button
                                 divClassName="mb-4"
-                                btnClassName="btn btn-primary w-100"
+                                btnClassName="btn w-100"
+                                style={{backgroundColor:"#0097b2"}}
                                 onClick={doLogin}
                                 btnLabel={formData.submitBtn}
                                 disabled={reqStatus.isLoading}

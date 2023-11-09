@@ -10,6 +10,7 @@ import NeumorphismWrapper from "../UI/Layouts/NeumorphismWrapper";
 const initialSiteState = {
   siteName: "",
   companyName: "",
+  reference: "",
   groupName: "",
   typeOfOwner: "",
   ownerName: "",
@@ -127,6 +128,7 @@ function EditSite() {
         groupName: turnaryOperation(responseGetSiteData.data.group_name),
         siteName: turnaryOperation(responseGetSiteData.data.site_name),
         companyName: turnaryOperation(responseGetSiteData.data.company),
+        reference: turnaryOperation(responseGetSiteData.data.reference),
         typeOfOwner: turnaryOperation(responseGetSiteData.data.type_of_owner),
         ownerName: turnaryOperation(responseGetSiteData.data.owner_name),
         currentSupplier: turnaryOperation(
@@ -225,6 +227,7 @@ function EditSite() {
       group_name: siteData.groupName,
       site_name: siteData.siteName,
       company: siteData.companyName,
+      reference: siteData.reference,
       type_of_owner: siteData.typeOfOwner,
       current_gas_and_electricity_supplier_details: siteData.currentSupplier,
       tenant: siteData.isTenant,
@@ -240,7 +243,6 @@ function EditSite() {
       agent_email: siteData.agentEmail,
       loa_header_to_use: siteData.loa_header_to_use,
       loa_template: siteData.loaTemplate,
-      lead_source:siteData.lead_source,
     };
     if (siteData.ownerName) {
       sendData.owner_name = siteData.ownerName;
@@ -365,17 +367,6 @@ function EditSite() {
               className="mb-3"
             >
               <Tab eventKey={0} title="Site Info">
-              <SelectionBox
-                  groupClass="mb-3 col-md-3 selectbox"
-                  groupId="groupName"
-                  label="Group Name"
-                  value={siteData.groupName}
-                  onChange={handleSelectionChange.bind(null, "groupName")}
-                  name="groupName"
-                  isSearch={true}
-                  objKey="group_name"
-                  url="sites/groups/"
-                />
                 <Form.Group className="mb-3 col-12" controlId="siteName">
                   <Form.Label>Site Name</Form.Label>
                   <Form.Control
@@ -391,7 +382,7 @@ function EditSite() {
                   />
                 </Form.Group>
                 <SelectionBox
-                  groupClass="mb-3 col-md-3 selectbox"
+                  groupClass="mb-3 col-md-6 selectbox"
                   groupId="companyName"
                   label="Company Name"
                   value={siteData.companyName}
@@ -400,6 +391,31 @@ function EditSite() {
                   isSearch={true}
                   objKey="name"
                   url="sites/get/company_name/"
+                />
+                <Form.Group className="mb-3 col-12" controlId="reference">
+                  <Form.Label>Reference</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="reference"
+                    value={siteData.reference}
+                    onChange={(e) =>
+                      dispatchInputChange({
+                        type: "reference",
+                        value: e.target.value,
+                      })
+                    }
+                  />
+                </Form.Group>
+                <SelectionBox
+                  groupClass="mb-3 col-md-6 selectbox"
+                  groupId="groupName"
+                  label="Group Name"
+                  value={siteData.groupName}
+                  onChange={handleSelectionChange.bind(null, "groupName")}
+                  name="groupName"
+                  isSearch={true}
+                  objKey="group_name"
+                  url="sites/groups/"
                 />
                 <Form.Group className="mb-3 col-12" controlId="typeOfOwner">
                   <Form.Label>Type Of Owner</Form.Label>
@@ -473,20 +489,20 @@ function EditSite() {
                     }}
                   />
                 </Form.Group>
-                  <Form.Group className="mb-3 col-12" controlId="isCoT">
-                    <Form.Check
-                      type="switch"
-                      id="custom-switch"
-                      label="COT"
-                      checked={siteData.isCoT}
-                      onChange={(e) => {
-                        dispatchInputChange({
-                          type: "isCoT",
-                          value: e.target.checked,
-                        });
-                      }}
-                    />
-                  </Form.Group>
+                <Form.Group className="mb-3 col-12" controlId="isCoT">
+                  <Form.Check
+                    type="switch"
+                    id="custom-switch"
+                    label="COT"
+                    checked={siteData.isCoT}
+                    onChange={(e) => {
+                      dispatchInputChange({
+                        type: "isCoT",
+                        value: e.target.checked,
+                      });
+                    }}
+                  />
+                </Form.Group>
               </Tab>
               <Tab eventKey={1} title="Our Details">
                 <Form.Group className="mb-3 col-12" controlId="siteReference">
@@ -504,7 +520,7 @@ function EditSite() {
                   />
                 </Form.Group>
                 <SelectionBox
-                  groupClass="mb-3 col-md-3 selectbox"
+                  groupClass="mb-3 col-md-6 selectbox"
                   groupId="supportContact"
                   label="Support Contact"
                   value={siteData.supportContact}
@@ -542,7 +558,7 @@ function EditSite() {
                     }
                   />
                 </Form.Group>
-                <Form.Group className="mb-3 col" controlId="leadType">
+                <Form.Group className="mb-3 col-12" controlId="leadType">
                   <Form.Label>Lead Type</Form.Label>
                   <SelectSearch
                     options={[
@@ -626,12 +642,12 @@ function EditSite() {
                   />
                 </Form.Group>
                 <SelectionBox
-                  groupClass="mb-3 col-md-3 selectbox"
+                  groupClass="mb-3 col-md-6 selectbox"
                   groupId="loaTemplate"
                   label="LOA Template"
                   value={siteData.loaTemplate}
                   onChange={handleSelectionChange.bind(null, "loaTemplate")}
-                  name="loaTemp late"
+                  name="loaTemplate"
                   isSearch={true}
                   objKey="name"
                   url="sites/get/loa_template/"
