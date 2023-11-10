@@ -22,6 +22,7 @@ import GroupQuotes from "./pages/QuoteGroup/GroupQuotes";
 import AddGroupQuote from "./pages/QuoteGroup/AddGroupQuote";
 import EditGroupQuote from "./pages/QuoteGroup/EditGroupQuote";
 import Notes from "./pages/Notes/Notes";
+import createCompany from '../src/components/Companies/CreateCompany';
 
 const router = createBrowserRouter(
   [
@@ -36,6 +37,10 @@ const router = createBrowserRouter(
         {
           path: "sites",
           element: <Site />,
+        },
+        {
+          path: "companies",
+          element: <createCompany />,
         },
         {
           path: "sites/:siteId",

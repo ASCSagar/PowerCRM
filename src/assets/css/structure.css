@@ -11,6 +11,8 @@
 html {
   min-height: 100%;
   direction: ltr;
+  font-weight: 100 !important;
+  box-shadow: none !important;
 }
 
 body {
@@ -21,7 +23,7 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   letter-spacing: 0.0312rem;
-  font-family: "Nunito", sans-serif;
+  font-family: "Nunito", sans-serif !important;
 }
 body:before {
   content: "";
@@ -545,12 +547,14 @@ body .navbar .dark-mode, body:not(.dark) .navbar .dark-mode {
 .navbar .search-animated .badge {
   position: absolute;
   right: 6px;
-  top: 6.5px;
-  font-size: 11px;
+  /* top: 6.5px; */
+  left: 15px;
+  font-size: 8px;
   letter-spacing: 1px;
   transform: none;
-  background-color: #bfc9d4;
-  color: #000;
+  background-color:transparent;
+  color:#2d4cc8;
+  font-weight: 400;
 }
 .navbar .search-animated.show-search {
   position: initial;
