@@ -42,6 +42,7 @@
 .JRhAO,
 .chdMBN div {
   white-space: break-spaces !important;
+  font-weight: 100 !important;
 }
 
 .enquiryAction {
@@ -561,6 +562,9 @@ p.nav-link {
   color: #0097b2 !important;
   background-color: transparent;
   box-shadow: none;
+}
+.search-wrapper {
+  border:1px solid #0097b2 !important; 
 }
 
 .btn-dark,

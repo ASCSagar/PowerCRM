@@ -64,10 +64,11 @@
   box-sizing: border-box;
 }
 html {
-  font-family: sans-serif;
+  font-family: "Nunito Sans", sans-serif !important;;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(38, 40, 51, 0);
+  box-shadow: none !important;
 }
 article,
 aside,
@@ -230,6 +231,7 @@ th {
 label {
   display: inline-block;
   margin-bottom: 0.5rem;
+  font-weight: 100 !important;
 }
 button {
   border-radius: 0;
@@ -2545,12 +2547,15 @@ textarea.form-control.is-invalid {
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 0.55rem;
+  border-color: #d1d9e6 !important;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff !important;
 }
 @media (prefers-reduced-motion: reduce) {
   .btn {
     transition: none;
+    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff !important;
   }
 }
 .btn:hover {
@@ -5844,6 +5849,7 @@ input[type="submit"].btn-block {
 .navbar-light .navbar-nav .nav-link.show,
 .navbar-light .navbar-nav .show > .nav-link {
   color: #44476a;
+  font-weight: 100;
 }
 .navbar-light .navbar-toggler {
   color: #44476a;
@@ -6111,6 +6117,7 @@ input[type="submit"].btn-block {
   justify-content: space-between;
   align-items: center;
   align-content: center;
+  height:44px;
 }
 .breadcrumb-item + .breadcrumb-item {
   padding-left: 0.5rem;
@@ -6208,7 +6215,7 @@ input[type="submit"].btn-block {
 }
 .badge {
   display: inline-block;
-  padding: 0.275rem 0.425rem;
+  /* padding: 0.275rem 0.425rem; */
   font-size: 0.7rem;
   font-weight: 600;
   line-height: 1;
@@ -6255,7 +6262,7 @@ a.badge-primary:focus {
   box-shadow: 0 0 0 0 rgba(230, 231, 238, 0.5);
 }
 .badge-secondary {
-  color: #ecf0f3;
+  color: #2d4cc8;
   background-color: #2d4cc8;
 }
 a.badge-secondary:focus,
@@ -19063,7 +19070,6 @@ button.section-slack:hover {
   font-size: 1rem;
   text-transform: normal;
   letter-spacing: 0;
-  font-weight: 400;
   transition: all 0.8s cubic-bezier(0.34, 1.45, 0.7, 1);
 }
 .navbar .navbar-nav .nav-link .nav-link-inner-text {
@@ -23553,7 +23559,7 @@ a.badge-primary:hover {
 }
 a.badge-secondary:focus,
 a.badge-secondary:hover {
-  color: #31344b;
+  color: #2d4cc8;
   background-color: #e6e7ee;
 }
 .badge-success {
@@ -23832,7 +23838,7 @@ a.badge-slack:hover {
   letter-spacing: 0.025em;
   font-size: 1rem;
   border-color: #d1d9e6;
-  box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
+  box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff !important;
 }
 .btn.btn-pill {
   border-radius: 2rem;
@@ -25271,7 +25277,7 @@ a.badge-slack:hover {
 }
 .breadcrumb-item + .breadcrumb-item:before {
   content: "\f101";
-  font-family: "Font Awesome 5 Free";
+  font-family: "Nunito Sans", sans-serif !important;
   font-weight: 900;
   font-size: 0.625rem;
   color: #66799e;
@@ -26016,14 +26022,14 @@ a.badge-slack:hover {
 }
 .carousel-control-prev-icon::before {
   content: "\f060";
-  font-family: "Font Awesome 5 Free";
+  font-family: "Nunito Sans", sans-serif !important;
   font-size: 2rem;
 }
 .carousel-control-next-icon {
   background-image: none;
 }
 .carousel-control-next-icon:before {
-  font-family: "Font Awesome 5 Free";
+  font-family: "Nunito Sans", sans-serif !important;
   content: "\f061";
   font-size: 2rem;
 }
@@ -26053,7 +26059,7 @@ a.badge-slack:hover {
 }
 .counter-alternate::after {
   content: "\f067";
-  font-family: "Font Awesome 5 Free";
+  font-family: "Nunito Sans", sans-serif !important;
   position: absolute;
   font-size: 2.25rem;
   color: #31344b;
@@ -28895,13 +28901,13 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Nunito Sans", sans-serif !important;
   font-weight: 400;
 }
 ol li,
 p,
 ul li {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Nunito Sans", sans-serif !important;
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.6;
