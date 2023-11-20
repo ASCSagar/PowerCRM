@@ -735,8 +735,16 @@ p.nav-link {
 }
 
 .breadcrumb {
-  /* margin-left: 25px; */
-  margin-bottom: 20px;
+  align-content: center !important;
+  align-items: center !important;
+  background-color: #fafbfe !important;
+  border-radius: 0.55rem !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: space-between !important;
+  list-style: none !important;
+  margin-bottom: 1rem !important;
+  padding: 0.75rem 1rem !important;
 }
 
 .headingHome {
@@ -849,8 +857,7 @@ tr:nth-child(odd) {
   background-color: rgb(255, 255, 255) !important;
 }
 .power-crm-text {
-  font-family: cursive; 
-  font-size: 18px;
+  font-size: 15px !important;
   font-weight: bold; 
   color: #333; 
 }
