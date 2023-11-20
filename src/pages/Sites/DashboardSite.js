@@ -7,7 +7,7 @@ import { quoteColumns } from "../Quotes";
 import useDTColumns from "../../hooks/useDTColumns";
 import DTable from "../../components/DTable"; 
 import { DTableFunction } from ".";
-import SupplyDetails from "../../components/Supplt Details/SupplyDetails";
+import SupplyDetails from "../../components/Supply Details/SupplyDetails";
 
 const DashboardSite = () => {
   const [key, setKey] = useState(0);
@@ -252,6 +252,6 @@ const DashboardSite = () => {
       </NeumorphismWrapper>
     </>
   );
-}
+};
 
 export default DashboardSite;
