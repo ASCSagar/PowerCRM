@@ -42,7 +42,7 @@ function NavBar(props) {
         </div>
         <ul className="list-unstyled menu-categories" id="accordionExample">
           <li className="menu">
-            <Link to="/notes" className="dropdown-toggle">
+            <Link to="/" className="dropdown-toggle">
               <div className="" style={{textDecoration:"none"}}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

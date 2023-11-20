@@ -5,7 +5,7 @@ import RecentQuotations from "../components/homepage/RecentQuotations";
 const HomePage = () => {
   return (
     <div className="col-md-12">
-      <div className="homePage">
+      <div className="row">
         <RecentLeads />
         <RecentQuotations />
       </div>
