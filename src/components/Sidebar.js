@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
 import applogo from "../assets/img/powercrm.jpeg";
-import CollapsableComponent from "../components/UI/CollapsableComponent";
 const NavBar = (props) => {
+  const location = useLocation();
   return (
     <>
       <div className="sidebar-wrapper sidebar-theme sidebar-width">
@@ -41,8 +41,8 @@ const NavBar = (props) => {
           </div>
           <ul className="list-unstyled menu-categories" id="accordionExample">
             <li className="menu">
-              <Link to="/" className="dropdown-toggle">
-                <div className="" style={{ textDecoration: "none" }}>
+              <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''} dropdown-toggle`}>
+                <div className="span-option" >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -58,13 +58,13 @@ const NavBar = (props) => {
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                     <polyline points="9 22 9 12 15 12 15 22"></polyline>
                   </svg>
-                  <span style={{ textDecoration: "none" }}>Dashboard</span>
+                  <span>Dashboard</span>
                 </div>
               </Link>
             </li>
-            <li>
-              <CollapsableComponent
-                svg={
+            <li className="menu">
+              <Link to="/companies" className={`nav-link ${location.pathname === '/companies' ? 'active' : ''} dropdown-toggle`}>
+                <div className="span-option">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -75,28 +75,23 @@ const NavBar = (props) => {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="feather feather-clipboard"
+                    className="feather feather-clipboard "
                   >
-                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                    <path d="M16 2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM15 0H5a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
+                    <rect x="8" y="4" width="8" height="4"></rect>
+                    <path d="M8 0v4"></path>
                   </svg>
-                }
-                name="Company"
-                subMenu={[
-                  { name: "Sites", link: "/sites" },
-                  { name: "Group Sites", link: "/group-sites" },
-                  { name: "Quotes", link: "/quotes" },
-                  { name: "Group Quotes", link: "/group-quotes" },
-                  { name: "Notes", link: "/notes" },
-                ]}
-                style={{ textDecoration: "none" }}
-              />
+                  <span>Company</span>
+                </div>
+              </Link>
+            </li>
+            <li>
             </li>
           </ul>
         </nav>
       </div>
     </>
   );
-}
+};
 
 export default NavBar;

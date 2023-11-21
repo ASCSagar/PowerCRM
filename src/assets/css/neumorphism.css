@@ -27360,10 +27360,6 @@ textarea[resize="horizontal"] {
 .nav-link {
   color: #44476a;
 }
-.nav-link.active,
-.nav-link:hover {
-  color: #31344b;
-}
 .nav-link.active img,
 .nav-link:hover img {
   opacity: inherit;
@@ -27372,9 +27368,6 @@ textarea[resize="horizontal"] {
 .nav-link i {
   position: relative;
   margin-right: 0.5rem;
-}
-.nav-link img {
-  opacity: 0.5;
 }
 .nav-tabs .nav-item {
   margin-bottom: 0;
@@ -29070,7 +29063,7 @@ article a:hover {
 }
 .text-secondary,
 .text-secondary:hover {
-  color: #2d4cc8 !important;
+  color: #2d4cc8 ;
 }
 .text-secondary .display-1,
 .text-secondary .display-2,

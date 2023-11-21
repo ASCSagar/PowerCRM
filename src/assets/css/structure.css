@@ -1116,7 +1116,7 @@ body .navbar .dark-mode, body:not(.dark) .navbar .dark-mode {
   display: none;
 }
 #sidebar ul.menu-categories li.menu > .dropdown-toggle svg:not(.badge-icon) {
-  color: #515365;
+  color: black !important;
   fill: rgba(136, 142, 168, 0.1);
   margin-right: 6px;
   vertical-align: middle;
