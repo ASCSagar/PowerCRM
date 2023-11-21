@@ -35,10 +35,10 @@ const reducerCSE = (state, action) => {
 };
 
 const CurrentSupplyElectricity = () => {
-  // const [open, setOpen] = useState(false);
-  // const handleButtonClick = () => {
-  //   setOpen(!open);
-  // };
+  const [open, setOpen] = useState(false);
+  const handleButtonClick = () => {
+    setOpen(!open);
+  };
   const [CSGasData, dispatchCSElectricityData] = useReducer(
     reducerCSE,
     initialCSE
@@ -341,42 +341,47 @@ const CurrentSupplyElectricity = () => {
           </Form.Group>
         </div>
       </div>
-      {/* <Button onClick={handleButtonClick}>Usage & Rates</Button>
+      <Button onClick={handleButtonClick}>Usage & Rates</Button>
       {open && (
         <div className="mt-3 row">
           <Form.Group className="mb-3 col-md-3">
-            <Form.Label>Standing Charge (Pence/Day)</Form.Label>
-            <Form.Control type="text" name="Standing Charge (Pence/Day)" />
+            <Form.Label>Standing Charge (pence/day)</Form.Label>
+            <Form.Control type="text" name="Standing Charge (pence/day)" />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
-            <Form.Label>Standing Charge Uplift (Pence/Day)</Form.Label>
+            <Form.Label>Standing Charge Uplift (pence/day)</Form.Label>
             <Form.Control
               type="text"
-              name="Standing Charge Uplift (Pence/Day)"
+              name="Standing Charge Uplift (pence/day)"
             />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
-            <Form.Label>Rate (Pence/KWH)</Form.Label>
-            <Form.Control type="text" name="Rate (Pence/KWH)" />
+            <Form.Label>kVA Rate (pence/kWh)</Form.Label>
+            <Form.Control type="text" name="Rate (pence/kWh)" />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Unit Rate Uplift</Form.Label>
             <Form.Control type="text" name="Unit Rate Uplift" />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
-            <Form.Label>Annual Usage (KWH)</Form.Label>
-            <Form.Control type="text" name="Annual Usage (KWH)" />
+            <Form.Label>Feed-in Tariff (FiT)</Form.Label>
+            <Form.Control type="text" name="Feed-in Tariff (FiT)" />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
-            <Form.Label>Total Commission (£)</Form.Label>
-            <Form.Control type="text" name="Supplier Reference" />
+            <Form.Label>Annual Day Usage (kWh)</Form.Label>
+            <Form.Control type="text" name="Annual Day Usage (kWh)" />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
-            <Form.Label>Annual Commission (£)</Form.Label>
-            <Form.Control type="text" name="Supplier Reference" />
+            <Form.Label>Day Rate (pence/kWh)</Form.Label>
+            <Form.Control type="text" name="Day Rate (pence/kWh)" />
           </Form.Group>
+          <div className="d-flex gap-4 mb-2">
+            <div>Total Annual Usage (kWh) : 0.00</div>
+            <div>Total Commission (£) : 0.00</div>
+            <div>Annual Commission (£) : 0.00</div>
+          </div>
         </div>
-      )} */}
+      )}
       {err ? <p className="red">{err}</p> : ""}
       <Button variant="primary" type="submit" disabled={reqStatus.isLoading}>
         {reqStatus.isLoading ? "Submitting" : "Submit"}
