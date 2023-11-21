@@ -265,7 +265,7 @@ const QuoteForm = (props) => {
             />
           </Form.Group>
           <Form.Group className="mb-3 col-6" controlId="dayRate">
-            <Form.Label>Day Rate (pence/kwh)</Form.Label>
+            <Form.Label>Day Rate (pence/kWh)</Form.Label>
             <Form.Control
               type="number"
               name="dayRate"
@@ -279,7 +279,7 @@ const QuoteForm = (props) => {
             />
           </Form.Group>
           <Form.Group className="mb-3 col-6" controlId="nightRate">
-            <Form.Label>Night Rate (pence/kwh)</Form.Label>
+            <Form.Label>Night Rate (pence/kWh)</Form.Label>
             <Form.Control
               type="number"
               name="nightRate"

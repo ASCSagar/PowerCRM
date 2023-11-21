@@ -53,11 +53,11 @@ export const quoteColumns = [
     selector: (row) => row.term,
   },
   {
-    name: "Day Rate (pence/kwh)",
+    name: "Day Rate (pence/kWh)",
     selector: (row) => row.day_rate,
   },
   {
-    name: "Night Rate (pence/kwh)",
+    name: "Night Rate (pence/kWh)",
     selector: (row) => row.night_rate,
   },
   {
