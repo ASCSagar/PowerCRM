@@ -267,9 +267,7 @@
 .select-search-is-highlighted,
 .select-search-option:not(.select-search-is-selected):hover,
 .rdt_TableHeadRow {
-  /* background-color: rgb(67 97 238 / 80%) !important;
-   */
-  background-color: #0097b2 !important;
+  background-color: #0097b2 ;
 }
 .select-search-options {
   margin: 0;
@@ -291,7 +289,8 @@
   background-color: #e6f5f7 !important;
 }
 .rdt_TableHeadRow .rdt_TableCol {
-  color: #fff;
+  background-color: #0097B2;
+  color: white;
 }
 
 .navbar-logo {
@@ -524,7 +523,7 @@ p.nav-link {
   svg:not(.badge-icon),
 #sidebar ul.menu-categories li.menu ul.submenu > li.active a,
 #sidebar ul.menu-categories li.menu ul.submenu > li.active a:hover {
-  color: #0097b2 !important;
+  color: #0097b2 ;
 }
 #sidebar ul.menu-categories li.menu ul.submenu > li a:hover:before,
 #sidebar ul.menu-categories li.menu ul.submenu > li.active a:before,
@@ -902,19 +901,31 @@ tr:nth-child(odd) {
     grid-template-columns: 1fr;
   }
 }
-
 .sidebar-logo-text {
   font-size: 15px;
 }
 .sidebar-logo {
   height: 40px;
 }
-
 .sidebar-width {
-  width: 14%;
+  width: 14% !important;
 }
 
 .sidebar-style {
   margin-top: -104px !important;
   width: 15.66666667% !important;
+}
+.nav-link.active {
+  color:white !important;
+  font-size: 15px !important; 
+  font-weight: bold !important; 
+  background-color: #0097B2;
+}
+.navigate-link.active{
+  font-weight: bold !important; 
+  background-color: transparent !important;
+  color: #0097B2 !important;
+}
+path.active{
+  color: white !important;
 }
