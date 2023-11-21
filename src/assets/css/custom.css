@@ -267,7 +267,7 @@
 .select-search-is-highlighted,
 .select-search-option:not(.select-search-is-selected):hover,
 .rdt_TableHeadRow {
-  background-color: #0097b2 ;
+   background-color: #0097b2 !important;
 }
 .select-search-options {
   margin: 0;
@@ -289,8 +289,7 @@
   background-color: #e6f5f7 !important;
 }
 .rdt_TableHeadRow .rdt_TableCol {
-  background-color: #0097B2;
-  color: white;
+  color: #fff;
 }
 
 .navbar-logo {
@@ -908,7 +907,7 @@ tr:nth-child(odd) {
   height: 40px;
 }
 .sidebar-width {
-  width: 14% !important;
+  width: 14%;
 }
 
 .sidebar-style {
