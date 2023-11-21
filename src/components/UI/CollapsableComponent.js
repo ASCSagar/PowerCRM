@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 function CollapsableComponent(props) {
   const [menuStatus, setMenuStatus] = useState(true);
   const location = useLocation();
   return (
     <li className="menu">
-      <a
-        href="#"
+      <Link
         onClick={() => setMenuStatus((status) => !status)}
         className={`dropdown-toggle ${menuStatus ? "" : "collapsed"}`}
         aria-expanded={menuStatus}
@@ -24,19 +23,18 @@ function CollapsableComponent(props) {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="feather feather-chevron-right"
-          >
-          </svg>
+          ></svg>
         </div>
-      </a>
+      </Link>
       <ul
         className={`submenu list-unstyled collapse ${menuStatus ? "show" : ""}`}
       >
         {props.subMenu.map((menu) => (
-          <li className={location.pathname === menu.link ? "active" : ""}>
+          <li key={menu.name} className={location.pathname === menu.link ? "active" : ""}>
             <NavLink to={menu.link}> {menu.name} </NavLink>
           </li>
         ))}

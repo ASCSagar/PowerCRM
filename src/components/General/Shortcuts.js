@@ -16,6 +16,9 @@ function Shortcuts() {
       if (event.altKey && event.key === "s") {
         navigate("/sites");
       }
+      if (event.altKey && event.key === "n") {
+        navigate("/notes");
+      }
     });
   }, []);
 
@@ -32,6 +35,9 @@ function Shortcuts() {
           </div>
           <div className="col-md-4">
             <p>Alt + q : All Qutoes</p>
+          </div>
+          <div className="col-md-4">
+            <p>Alt + n : All Notes</p>
           </div>
         </div>
       </NeumorphismWrapper>

@@ -682,8 +682,8 @@ label {
   box-shadow: none;
 }
 .form-check-input:checked {
-  background-color: #0097b2;
-  border-color: #0097b2;
+  background-color: #0097b2 !important;
+  border-color: #0097b2 !important;
 }
 
 .form-check:not(.form-switch) .form-check-input:checked[type="checkbox"] {

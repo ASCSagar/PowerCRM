@@ -32,7 +32,7 @@ function Base() {
       >
         <div className="container-fluid mt-3">
           <div className="row">
-            <div className="col-2" style={{marginTop:"-104px"}}>
+            <div className="col-2 sidebar-style">
               <Sidebar />
             </div>
             <div className="col-10">

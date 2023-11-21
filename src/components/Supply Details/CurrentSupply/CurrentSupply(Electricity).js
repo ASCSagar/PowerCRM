@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import SelectionBox from "../../Form/SelectionBox";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
 import LoadingData from "../../UI/LoadingData";
 import { uiAction } from "../../../store/uiStore";
@@ -39,9 +39,14 @@ const CurrentSupplyElectricity = () => {
   // const handleButtonClick = () => {
   //   setOpen(!open);
   // };
-  const [CSGasData, dispatchCSElectricityData] = useReducer(reducerCSE, initialCSE);
+  const [CSGasData, dispatchCSElectricityData] = useReducer(
+    reducerCSE,
+    initialCSE
+  );
   const dispatch = useDispatch();
   const paramsId = useParams().siteId;
+  const navigate = useNavigate();
+  const [err, setErr] = useState("");
 
   const [
     sendCurrentElectricityData,
@@ -84,11 +89,14 @@ const CurrentSupplyElectricity = () => {
         e_won_date: responseCurrentElectricityData.data.e_won_date,
         e_contract_start_date:
           responseCurrentElectricityData.data.e_contract_start_date,
-        e_contract_end_date: responseCurrentElectricityData.data.e_contract_end_date,
+        e_contract_end_date:
+          responseCurrentElectricityData.data.e_contract_end_date,
         e_contract_length_months:
           responseCurrentElectricityData.data.e_contract_length_months,
-        e_contract_back_date: responseCurrentElectricityData.data.e_contract_back_date,
-        e_supplier_reference: responseCurrentElectricityData.data.e_supplier_reference,
+        e_contract_back_date:
+          responseCurrentElectricityData.data.e_contract_back_date,
+        e_supplier_reference:
+          responseCurrentElectricityData.data.e_supplier_reference,
         e_supplier_information1:
           responseCurrentElectricityData.data.e_supplier_information1,
         e_supplier_information2:
@@ -143,13 +151,18 @@ const CurrentSupplyElectricity = () => {
 
   useEffect(() => {
     if (responseCSEData) {
-      dispatch(
-        uiAction.setNotification({
-          show: true,
-          msg: `Supply Details For GAS Added Successfully`,
-        })
-      );
-      dispatchCSElectricityData({ reset: true, value: initialCSE });
+      if (responseCSEData.status === 200 || responseCSEData.status === 201) {
+        navigate("/sites");
+        dispatch(
+          uiAction.setNotification({
+            show: true,
+            msg: `Current Supply For Electricity Edited Successfully`,
+          })
+        );
+        dispatchCSElectricityData({ reset: true, value: initialCSE });
+      } else {
+        setErr("Some Proble Occured, Please try again");
+      }
     }
   }, [responseCSEData]);
 
@@ -364,6 +377,7 @@ const CurrentSupplyElectricity = () => {
           </Form.Group>
         </div>
       )} */}
+      {err ? <p className="red">{err}</p> : ""}
       <Button variant="primary" type="submit" disabled={reqStatus.isLoading}>
         {reqStatus.isLoading ? "Submitting" : "Submit"}
       </Button>
