@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
-const Header = (props) => {
+const Header = () => {
   const location = useLocation().pathname;
 
   const breadcrumb = () => {

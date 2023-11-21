@@ -564,7 +564,7 @@ p.nav-link {
   box-shadow: none;
 }
 .search-wrapper {
-  border:1px solid #0097b2 !important; 
+  border: 1px solid #0097b2 !important;
 }
 
 .btn-dark,
@@ -768,7 +768,7 @@ p.nav-link {
 }
 
 .toast-body {
-  color: #000;
+  color: #000 !important;
 }
 .centerBtn {
   text-align: center;
@@ -865,7 +865,6 @@ tr:nth-child(odd) {
   background-color: white;
 }
 
-
 .gridContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -880,7 +879,7 @@ tr:nth-child(odd) {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 } 
 
-.cardHeader  {
+.cardHeader {
   background-color: #0097b2;
   color: #fafbfe;
   font-weight: 400;
@@ -902,4 +901,20 @@ tr:nth-child(odd) {
   .gridContainer {
     grid-template-columns: 1fr;
   }
+}
+
+.sidebar-logo-text {
+  font-size: 15px;
+}
+.sidebar-logo {
+  height: 40px;
+}
+
+.sidebar-width {
+  width: 14%;
+}
+
+.sidebar-style {
+  margin-top: -104px !important;
+  width: 15.66666667% !important;
 }

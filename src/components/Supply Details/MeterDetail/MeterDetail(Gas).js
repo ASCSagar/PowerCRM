@@ -1,9 +1,9 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import useFetch from "../../../hooks/useFetch";
 import { uiAction } from "../../../store/uiStore";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import LoadingData from "../../UI/LoadingData";
 
 const initialMeterDetailsGas = {
@@ -31,6 +31,8 @@ const MeterDetailGas = () => {
   );
   const dispatch = useDispatch();
   const paramsId = useParams().siteId;
+    const navigate = useNavigate();
+    const [err, setErr] = useState("");
 
   const [
     sendMeterGasData,
@@ -109,13 +111,18 @@ const MeterDetailGas = () => {
 
   useEffect(() => {
     if (responseMGData) {
-      dispatch(
-        uiAction.setNotification({
-          show: true,
-          msg: `Meter Details For GAS Added Successfully`,
-        })
-      );
-      dispatchmeterGasData({ reset: true, value: initialMeterDetailsGas });
+      if (responseMGData.status === 200 || responseMGData.status === 201) {
+        navigate("/sites");
+        dispatch(
+          uiAction.setNotification({
+            show: true,
+            msg: `Meter Details For GAS Edited Successfully`,
+          })
+        );
+        dispatchmeterGasData({ reset: true, value: initialMeterDetailsGas });
+      } else {
+        setErr("Some Proble Occured, Please try again");
+      }
     }
   }, [responseMGData]);
 
@@ -199,6 +206,7 @@ const MeterDetailGas = () => {
           </Form.Group>
         </div>
       </div>
+      {err ? <p className="red">{err}</p> : ""}
       <Button variant="primary" type="submit" disabled={reqStatus.isLoading}>
         {reqStatus.isLoading ? "Submitting" : "Submit"}
       </Button>

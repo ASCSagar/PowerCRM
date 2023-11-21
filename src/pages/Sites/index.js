@@ -11,7 +11,7 @@ export const siteColumns = [
       <>
         <Link
           to={`/sites/edit/${row.id}`}
-          className="enquiryAction" 
+          className="enquiryAction"
           title="Edit Site "
         >
           <svg
@@ -21,10 +21,10 @@ export const siteColumns = [
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-edit-2 p-1 br-8 mb-1"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="feather feather-edit-2 p-1 br-8 mb-1"
           >
             <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
           </svg>
@@ -81,11 +81,9 @@ export const siteColumns = [
   },
 ];
 
-
 export const DTableFunction = function (data) {
   return data;
 };
-
 
 const Site = () => {
   const [refreshTable, setRefreshTable] = useState(true);

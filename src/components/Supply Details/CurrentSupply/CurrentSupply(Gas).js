@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import SelectionBox from "../../Form/SelectionBox";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import useFetch from "../../../hooks/useFetch";
 import { uiAction } from "../../../store/uiStore";
@@ -42,6 +42,8 @@ const CurrentSupplyGas = () => {
   const [CSGasData, dispatchCSGasData] = useReducer(reducerCSG, initialCSG);
   const dispatch = useDispatch();
   const paramsId = useParams().siteId;
+  const navigate = useNavigate();
+  const [err, setErr] = useState("");
 
   const [
     sendCurrentGasData,
@@ -143,20 +145,25 @@ const CurrentSupplyGas = () => {
 
   useEffect(() => {
     if (responseCSGData) {
-      dispatch(
-        uiAction.setNotification({
-          show: true,
-          msg: `Supply Details For GAS Added Successfully`,
-        })
-      );
-      dispatchCSGasData({ reset: true, value: initialCSG });
+      if (responseCSGData.status === 200 || responseCSGData.status === 201) {
+        navigate("/sites");
+        dispatch(
+          uiAction.setNotification({
+            show: true,
+            msg: `Current Supply For GAS Edited Successfully`,
+          })
+        );
+        dispatchCSGasData({ reset: true, value: initialCSG });
+      } else {
+        setErr("Some Proble Occured, Please try again");
+      }
     }
   }, [responseCSGData]);
 
   if (reqGetCurrentGasStatus.isLoading) {
     return <LoadingData className="text-center" />;
   }
-  
+
   return (
     <Form onSubmit={CSGas}>
       <div className="row">
@@ -364,6 +371,7 @@ const CurrentSupplyGas = () => {
           </Form.Group>
         </div>
       )} */}
+      {err ? <p className="red">{err}</p> : ""}
       <Button variant="primary" type="submit" disabled={reqStatus.isLoading}>
         {reqStatus.isLoading ? "Submitting" : "Submit"}
       </Button>

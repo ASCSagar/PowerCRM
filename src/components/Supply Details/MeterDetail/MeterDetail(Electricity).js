@@ -1,7 +1,7 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
 import { uiAction } from "../../../store/uiStore";
 import LoadingData from "../../UI/LoadingData";
@@ -12,7 +12,7 @@ const initialMeterDetailsElectricity = {
   e_meter_type: "",
   e_serial_number: "",
   e_capacity: "",
-  e_voltage:"",
+  e_voltage: "",
   e_measurement_class: "",
   e_smart_meter: false,
   e_related_meter: false,
@@ -37,6 +37,8 @@ const MeterDetailElectricity = () => {
   );
   const dispatch = useDispatch();
   const paramsId = useParams().siteId;
+  const navigate = useNavigate();
+  const [err, setErr] = useState("");
 
   const [
     sendMeterElectricityData,
@@ -80,8 +82,7 @@ const MeterDetailElectricity = () => {
         e_capacity: responseMeterElectricityData.data.e_capacity,
         e_measurement_class:
           responseMeterElectricityData.data.e_measurement_class,
-        e_voltage:
-          responseMeterElectricityData.data.e_voltage,
+        e_voltage: responseMeterElectricityData.data.e_voltage,
         e_smart_meter: responseMeterElectricityData.data.e_smart_meter,
         e_related_meter: responseMeterElectricityData.data.e_related_meter,
         e_ley_meter: responseMeterElectricityData.data.e_ley_meter,
@@ -129,16 +130,21 @@ const MeterDetailElectricity = () => {
 
   useEffect(() => {
     if (responseMEData) {
-      dispatch(
-        uiAction.setNotification({
-          show: true,
-          msg: `Meter Details For Electricity Added Successfully`,
-        })
-      );
-      dispatchmeterElectricityData({
-        reset: true,
-        value: initialMeterDetailsElectricity,
-      });
+      if (responseMEData.status === 200 || responseMEData.status === 201) {
+        navigate("/sites");
+        dispatch(
+          uiAction.setNotification({
+            show: true,
+            msg: `Meter Details For Electricity Edited Successfully`,
+          })
+        );
+        dispatchmeterElectricityData({
+          reset: true,
+          value: initialMeterDetailsElectricity,
+        });
+      } else {
+        setErr("Some Proble Occured, Please try again");
+      }
     }
   }, [responseMEData]);
 
@@ -305,6 +311,7 @@ const MeterDetailElectricity = () => {
           </Form.Group>
         </div>
       </div>
+      {err ? <p className="red">{err}</p> : ""}
       <Button variant="primary" type="submit" disabled={reqStatus.isLoading}>
         {reqStatus.isLoading ? "Submitting" : "Submit"}
       </Button>

@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import SelectionBox from "../../Form/SelectionBox";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
 import { uiAction } from "../../../store/uiStore";
 import LoadingData from "../../UI/LoadingData";
@@ -43,6 +43,8 @@ const NewSupplyGas = () => {
   const [NSGasData, dispatchNSGasData] = useReducer(reducerNSG, initialNSG);
   const dispatch = useDispatch();
   const paramsId = useParams().siteId;
+  const navigate = useNavigate();
+  const [err, setErr] = useState("");
 
   const [
     sendNewGasData,
@@ -145,13 +147,18 @@ const NewSupplyGas = () => {
 
   useEffect(() => {
     if (responseNSGData) {
-      dispatch(
-        uiAction.setNotification({
-          show: true,
-          msg: `Supply Details For GAS Added Successfully`,
-        })
-      );
-      dispatchNSGasData({ reset: true, value: initialNSG });
+      if (responseNSGData.status === 200 || responseNSGData.status === 201) {
+        navigate("/sites");
+        dispatch(
+          uiAction.setNotification({
+            show: true,
+            msg: `Supply Details For GAS Edited Successfully`,
+          })
+        );
+        dispatchNSGasData({ reset: true, value: initialNSG });
+      } else {
+        setErr("Some Proble Occured, Please try again");
+      }
     }
   }, [responseNSGData]);
 
@@ -380,6 +387,7 @@ const NewSupplyGas = () => {
           </Form.Group>
         </div>
       )} */}
+      {err ? <p className="red">{err}</p> : ""}
       <Button variant="primary" type="submit" disabled={reqStatus.isLoading}>
         {reqStatus.isLoading ? "Submitting" : "Submit"}
       </Button>
