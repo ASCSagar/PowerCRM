@@ -138,8 +138,7 @@ function Login() {
       <div className="form">
         <div className="auth-container">
           <h1
-            className="text-center"
-            style={{ marginBottom: "100px", marginTop: "50px" }}
+            className="text-center welcome-logo"
           >
             Welcome To PowerCRM
           </h1>
@@ -184,7 +183,7 @@ function Login() {
                                 reducerName="password"
                               />
                               {errorLogin.length ? (
-                                <p style={{ color: "red" }}>{errorLogin}</p>
+                                <p className="error-color">{errorLogin}</p>
                               ) : (
                                 ""
                               )}
@@ -200,7 +199,7 @@ function Login() {
                               <Button
                                 divClassName="mb-4"
                                 btnClassName="btn w-100"
-                                style={{backgroundColor:"#0097b2"}}
+                                className="button-bg"
                                 onClick={doLogin}
                                 btnLabel={formData.submitBtn}
                                 disabled={reqStatus.isLoading}

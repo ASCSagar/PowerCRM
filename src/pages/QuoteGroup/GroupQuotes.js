@@ -92,7 +92,14 @@ const GroupQuotes = () => {
       <NeumorphismWrapper>
         {renderColBtns()}
         <div className="text-right mb-3">
+<<<<<<< Updated upstream
           <Link to="/group-quotes/add" className="btn" style={{backgroundColor:"#0097b2"}}>
+=======
+          <Link
+            to="/group-quotes/add"
+            className="btn quote-bg"
+          >
+>>>>>>> Stashed changes
             Add Group Quotes
           </Link>
         </div>

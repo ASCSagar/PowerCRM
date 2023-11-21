@@ -94,7 +94,15 @@ const NavBar = () => {
                 </Nav.Link>
               </Nav>
             </Navbar>
+<<<<<<< Updated upstream
             <Nav.Link as={Button} onClick={logout} class="btn btn-primary" style={{width:"85px",height:"35px"}}>
+=======
+            <Nav.Link
+              as={Button}
+              onClick={logout}
+              className="btn btn-primary logout-style"
+            >
+>>>>>>> Stashed changes
               Logout
             </Nav.Link>
           </div>

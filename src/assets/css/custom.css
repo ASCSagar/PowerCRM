@@ -856,4 +856,84 @@ tr:nth-child(odd) {
 }
 .loginlogo {
   background-color: white;
+<<<<<<< Updated upstream
+=======
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+.cardWrapperMain {
+  background-color: #fafbfe ;  
+  border: 1px solid #0097b2; 
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} 
+
+.cardHeader {
+  background-color: #0097b2;
+  color: #fafbfe;
+  font-weight: 400;
+  padding: 10px;
+  border-radius: 8px 8px 0 0;
+}
+
+.cardBody {
+  padding: 10px;
+}
+
+.itemLabel {
+  font-weight: bold;
+  color: #333;
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .gridContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sidebar-logo-text {
+  font-size: 15px;
+}
+.sidebar-logo {
+  height: 40px;
+}
+
+.sidebar-width {
+  width: 14% !important;
+}
+
+.sidebar-style {
+  margin-top: -104px !important;
+  width: 15.66666667% !important;
+}
+.quote-bg{
+  background-color: #0097b2 !important;
+}
+.welcome-logo{
+  margin-bottom: 100px !important;
+  margin-top: 50px !important;
+}
+.error-color{
+  color: red !important;
+}
+.button-bg{
+  background-color: #0097b2 !important;
+}
+.column-btn{
+  margin-bottom: 20px !important;
+}
+.logout-style{
+  width: 85px !important;
+  height: 35px !important;
+}
+.nav-option{
+  text-decoration: none;
+>>>>>>> Stashed changes
 }

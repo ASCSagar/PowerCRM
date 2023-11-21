@@ -56,7 +56,7 @@ function useDTColumns(column) {
             <Button
               variant="outline-primary"
               onClick={() => setShowColFilter((status) => !status)}
-              style={{ marginBottom: "20px" }}
+              className="column-btn"
             >
               Show Column &nbsp;
               <svg

@@ -95,7 +95,14 @@ const Quote = () => {
       <NeumorphismWrapper>
         {renderColBtns()}
         <div className="text-right mb-3">
+<<<<<<< Updated upstream
           <Link to="/quotes/add" className="btn" style={{backgroundColor:"#0097b2"}}>
+=======
+          <Link
+            to="/quotes/add"
+            className="btn quote-bg"
+          >
+>>>>>>> Stashed changes
             Add Quote
           </Link>
         </div>
