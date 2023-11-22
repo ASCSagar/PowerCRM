@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
-const Header = () => {
+const Header = (props) => {
   const location = useLocation().pathname;
 
   const breadcrumb = () => {
@@ -29,15 +29,6 @@ const Header = () => {
           <div className="search-animated toggle-search">
             <span className="badge badge-secondary">{breadcrumb()}</span>
           </div>
-          {location === "/group-quotes" ? (
-            <div className="text-right mb-3">
-              <Link to="/group-quotes/add" className="btn" style={{backgroundColor:"#0097b2"}}>
-                Add Group Quotes
-              </Link>
-            </div>
-          ) : (
-            ""
-          )}
         </header>
       </div>
     </>
