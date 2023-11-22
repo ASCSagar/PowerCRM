@@ -1,13 +1,8 @@
 import "./assets/css/custom.css";
 import "../src/assets/css/neumorphism.css";
 import './assets/css/auth-boxed.css';
-import './assets/css/dash_1.css';
-import './assets/css/LoaderUni.css';
 import './assets/css/main.css';
-import './assets/css/monokai-sublime.css';
-import './assets/css/perfect-scrollbar.css';
 import './assets/css/structure.css';
-import './assets/css/waves.min.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
