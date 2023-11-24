@@ -22,6 +22,15 @@ const initialCSE = {
   e_supplier_information3: "",
   e_agent: false,
   e_customer: false,
+  stading_charge: "",
+  standing_charge_uplift: "",
+  kva_rate: "",
+  unit_rate_uplift: "",
+  feed_in_tariff: "",
+  annual_day_usage: "",
+  day_rate: "",
+  annual_night_usage: "",
+  night_rate: "",
 };
 
 const reducerCSE = (state, action) => {
@@ -39,7 +48,7 @@ const CurrentSupplyElectricity = () => {
   const handleButtonClick = () => {
     setOpen(!open);
   };
-  const [CSGasData, dispatchCSElectricityData] = useReducer(
+  const [CSElectricData, dispatchCSElectricityData] = useReducer(
     reducerCSE,
     initialCSE
   );
@@ -105,6 +114,30 @@ const CurrentSupplyElectricity = () => {
           responseCurrentElectricityData.data.e_supplier_information3,
         e_agent: responseCurrentElectricityData.data.e_agent,
         e_customer: responseCurrentElectricityData.data.e_customer,
+        stading_charge:
+          responseCurrentElectricityData.data.electric_usage_rate
+            .stading_charge,
+        standing_charge_uplift:
+          responseCurrentElectricityData.data.electric_usage_rate
+            .standing_charge_uplift,
+        kva_rate:
+          responseCurrentElectricityData.data.electric_usage_rate.kva_rate,
+        unit_rate_uplift:
+          responseCurrentElectricityData.data.electric_usage_rate
+            .unit_rate_uplift,
+        feed_in_tariff:
+          responseCurrentElectricityData.data.electric_usage_rate
+            .feed_in_tariff,
+        annual_day_usage:
+          responseCurrentElectricityData.data.electric_usage_rate
+            .annual_day_usage,
+        day_rate:
+          responseCurrentElectricityData.data.electric_usage_rate.day_rate,
+        annual_night_usage:
+          responseCurrentElectricityData.data.electric_usage_rate
+            .annual_night_usage,
+        night_rate:
+          responseCurrentElectricityData.data.electric_usage_rate.night_rate,
       };
       dispatchCSElectricityData({
         all: true,
@@ -116,21 +149,47 @@ const CurrentSupplyElectricity = () => {
   const CSElectricity = async function (e) {
     e.preventDefault();
     let sendData = {
-      e_supplier: CSGasData.e_supplier,
-      e_product: CSGasData.e_product,
-      e_contract_type: CSGasData.e_contract_type,
-      e_won_date: CSGasData.e_won_date,
-      e_contract_start_date: CSGasData.e_contract_start_date,
-      e_contract_end_date: CSGasData.e_contract_end_date,
-      e_contract_length_months: CSGasData.e_contract_length_months,
-      e_contract_back_date: CSGasData.e_contract_back_date,
-      e_supplier_reference: CSGasData.e_supplier_reference,
-      e_supplier_information1: CSGasData.e_supplier_information1,
-      e_supplier_information2: CSGasData.e_supplier_information2,
-      e_supplier_information3: CSGasData.e_supplier_information3,
-      e_agent: CSGasData.e_agent,
-      e_customer: CSGasData.e_customer,
+      e_supplier: CSElectricData.e_supplier,
+      e_product: CSElectricData.e_product,
+      e_contract_type: CSElectricData.e_contract_type,
+      e_won_date: CSElectricData.e_won_date,
+      e_contract_start_date: CSElectricData.e_contract_start_date,
+      e_contract_end_date: CSElectricData.e_contract_end_date,
+      e_contract_length_months: CSElectricData.e_contract_length_months,
+      e_contract_back_date: CSElectricData.e_contract_back_date,
+      e_supplier_reference: CSElectricData.e_supplier_reference,
+      e_supplier_information1: CSElectricData.e_supplier_information1,
+      e_supplier_information2: CSElectricData.e_supplier_information2,
+      e_supplier_information3: CSElectricData.e_supplier_information3,
+      e_agent: CSElectricData.e_agent,
+      e_customer: CSElectricData.e_customer,
     };
+    const electricUsageRate = {
+      electric_usage_rate: {
+        stading_charge: CSElectricData.stading_charge,
+        standing_charge_uplift: CSElectricData.standing_charge_uplift,
+        kva_rate: CSElectricData.kva_rate,
+        unit_rate_uplift: CSElectricData.unit_rate_uplift,
+        feed_in_tariff: CSElectricData.feed_in_tariff,
+        annual_day_usage: CSElectricData.annual_day_usage,
+        day_rate: CSElectricData.day_rate,
+        annual_night_usage: CSElectricData.annual_night_usage,
+        night_rate: CSElectricData.night_rate,
+      },
+    };
+    if (
+      electricUsageRate.electric_usage_rate.stading_charge ||
+      electricUsageRate.electric_usage_rate.standing_charge_uplift ||
+      electricUsageRate.electric_usage_rate.kva_rate ||
+      electricUsageRate.electric_usage_rate.unit_rate_uplift ||
+      electricUsageRate.electric_usage_rate.feed_in_tariff ||
+      electricUsageRate.electric_usage_rate.annual_day_usage ||
+      electricUsageRate.electric_usage_rate.day_rate ||
+      electricUsageRate.electric_usage_rate.annual_night_usage ||
+      electricUsageRate.electric_usage_rate.night_rate
+    ) {
+      sendData = { ...sendData, ...electricUsageRate };
+    }
     setCurrentElectricityResponseData(null);
     setStatus({ isLoading: true, isError: false });
     setCurrentElectricityReqData({
@@ -178,7 +237,7 @@ const CurrentSupplyElectricity = () => {
           <Form.Control
             type="text"
             name="Supplier"
-            value={CSGasData.e_supplier}
+            value={CSElectricData.e_supplier}
             onChange={(e) =>
               dispatchCSElectricityData({
                 type: "e_supplier",
@@ -192,7 +251,7 @@ const CurrentSupplyElectricity = () => {
           <Form.Control
             type="text"
             name="Product"
-            value={CSGasData.e_product}
+            value={CSElectricData.e_product}
             onChange={(e) =>
               dispatchCSElectricityData({
                 type: "e_product",
@@ -212,7 +271,7 @@ const CurrentSupplyElectricity = () => {
           <Form.Control
             type="date"
             name="Won Date"
-            value={CSGasData.e_won_date}
+            value={CSElectricData.e_won_date}
             onChange={(e) =>
               dispatchCSElectricityData({
                 type: "e_won_date",
@@ -226,7 +285,7 @@ const CurrentSupplyElectricity = () => {
           <Form.Control
             type="date"
             name="Contract Start Date"
-            value={CSGasData.e_contract_start_date}
+            value={CSElectricData.e_contract_start_date}
             onChange={(e) =>
               dispatchCSElectricityData({
                 type: "e_contract_start_date",
@@ -240,7 +299,7 @@ const CurrentSupplyElectricity = () => {
           <Form.Control
             type="date"
             name="Contract End Date"
-            value={CSGasData.e_contract_end_date}
+            value={CSElectricData.e_contract_end_date}
             onChange={(e) =>
               dispatchCSElectricityData({
                 type: "e_contract_end_date",
@@ -254,7 +313,7 @@ const CurrentSupplyElectricity = () => {
           <Form.Control
             type="number"
             name="Contract Length"
-            value={CSGasData.e_contract_length_months}
+            value={CSElectricData.e_contract_length_months}
             onChange={(e) =>
               dispatchCSElectricityData({
                 type: "e_contract_length_months",
@@ -268,7 +327,7 @@ const CurrentSupplyElectricity = () => {
           <Form.Control
             type="date"
             name="Contract Back Date"
-            value={CSGasData.e_contract_back_date}
+            value={CSElectricData.e_contract_back_date}
             onChange={(e) =>
               dispatchCSElectricityData({
                 type: "e_contract_back_date",
@@ -282,7 +341,7 @@ const CurrentSupplyElectricity = () => {
           <Form.Control
             type="text"
             name="Supplier Reference"
-            value={CSGasData.e_supplier_reference}
+            value={CSElectricData.e_supplier_reference}
             onChange={(e) =>
               dispatchCSElectricityData({
                 type: "e_supplier_reference",
@@ -316,7 +375,7 @@ const CurrentSupplyElectricity = () => {
               type="switch"
               id="custom-switch"
               label="Agent"
-              checked={CSGasData.e_agent}
+              checked={CSElectricData.e_agent}
               onChange={(e) => {
                 dispatchCSElectricityData({
                   type: "e_agent",
@@ -330,7 +389,7 @@ const CurrentSupplyElectricity = () => {
               type="switch"
               id="custom-switch"
               label="Customer"
-              checked={CSGasData.e_customer}
+              checked={CSElectricData.e_customer}
               onChange={(e) => {
                 dispatchCSElectricityData({
                   type: "e_customer",
@@ -346,34 +405,129 @@ const CurrentSupplyElectricity = () => {
         <div className="mt-3 row">
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Standing Charge (pence/day)</Form.Label>
-            <Form.Control type="text" name="Standing Charge (pence/day)" />
+            <Form.Control
+              type="number"
+              name="Stading Charge (pence/day)"
+              value={CSElectricData.stading_charge}
+              onChange={(e) =>
+                dispatchCSElectricityData({
+                  type: "stading_charge",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Standing Charge Uplift (pence/day)</Form.Label>
             <Form.Control
-              type="text"
+              type="number"
               name="Standing Charge Uplift (pence/day)"
+              value={CSElectricData.standing_charge_uplift}
+              onChange={(e) =>
+                dispatchCSElectricityData({
+                  type: "standing_charge_uplift",
+                  value: e.target.value,
+                })
+              }
             />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>kVA Rate (pence/kWh)</Form.Label>
-            <Form.Control type="text" name="Rate (pence/kWh)" />
+            <Form.Control
+              type="number"
+              name="kVA Rate (pence/kWh)"
+              value={CSElectricData.kva_rate}
+              onChange={(e) =>
+                dispatchCSElectricityData({
+                  type: "kva_rate",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Unit Rate Uplift</Form.Label>
-            <Form.Control type="text" name="Unit Rate Uplift" />
+            <Form.Control
+              type="number"
+              name="Unit Rate Uplift"
+              value={CSElectricData.unit_rate_uplift}
+              onChange={(e) =>
+                dispatchCSElectricityData({
+                  type: "unit_rate_uplift",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Feed-in Tariff (FiT)</Form.Label>
-            <Form.Control type="text" name="Feed-in Tariff (FiT)" />
+            <Form.Control
+              type="number"
+              name="Feed-in Tariff (FiT)"
+              value={CSElectricData.feed_in_tariff}
+              onChange={(e) =>
+                dispatchCSElectricityData({
+                  type: "feed_in_tariff",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Annual Day Usage (kWh)</Form.Label>
-            <Form.Control type="text" name="Annual Day Usage (kWh)" />
+            <Form.Control
+              type="number"
+              name="Annual Day Usage (kWh)"
+              value={CSElectricData.annual_day_usage}
+              onChange={(e) =>
+                dispatchCSElectricityData({
+                  type: "annual_day_usage",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Day Rate (pence/kWh)</Form.Label>
-            <Form.Control type="text" name="Day Rate (pence/kWh)" />
+            <Form.Control
+              type="number"
+              name="Day Rate (pence/kWh)"
+              value={CSElectricData.day_rate}
+              onChange={(e) =>
+                dispatchCSElectricityData({
+                  type: "day_rate",
+                  value: e.target.value,
+                })
+              }
+            />
+          </Form.Group>
+          <Form.Group className="mb-3 col-md-3">
+            <Form.Label>Annual Night Usage (kWh)</Form.Label>
+            <Form.Control
+              type="number"
+              name="Annual Night Usage (kWh)"
+              value={CSElectricData.annual_night_usage}
+              onChange={(e) =>
+                dispatchCSElectricityData({
+                  type: "annual_night_usage",
+                  value: e.target.value,
+                })
+              }
+            />
+          </Form.Group>
+          <Form.Group className="mb-3 col-md-3">
+            <Form.Label>Night Rate (pence/kWh)</Form.Label>
+            <Form.Control
+              type="number"
+              name="Night Rate (pence/kWh)"
+              value={CSElectricData.night_rate}
+              onChange={(e) =>
+                dispatchCSElectricityData({
+                  type: "night_rate",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <div className="d-flex gap-4 mb-2">
             <div>Total Annual Usage (kWh) : 0.00</div>
