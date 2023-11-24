@@ -23,6 +23,17 @@ const initialNSE = {
   e_notes: "",
   e_agent: false,
   e_customer: false,
+  stading_charge: "",
+  standing_charge_uplift: "",
+  kva_rate: "",
+  unit_rate_uplift: "",
+  feed_in_tariff: "",
+  annual_day_usage: "",
+  day_rate: "",
+  annual_night_usage: "",
+  night_rate: "",
+  annual_evening_usage: "",
+  evening_rate: "",
 };
 
 const reducerNSE = (state, action) => {
@@ -107,6 +118,29 @@ const NewSupplyElectricity = () => {
         e_notes: responseNewElectricityData.data.e_notes,
         e_agent: responseNewElectricityData.data.e_agent,
         e_customer: responseNewElectricityData.data.e_customer,
+        stading_charge:
+          responseNewElectricityData.data.electric_usage_rate.stading_charge,
+        standing_charge_uplift:
+          responseNewElectricityData.data.electric_usage_rate
+            .standing_charge_uplift,
+        kva_rate: responseNewElectricityData.data.electric_usage_rate.kva_rate,
+        unit_rate_uplift:
+          responseNewElectricityData.data.electric_usage_rate.unit_rate_uplift,
+        feed_in_tariff:
+          responseNewElectricityData.data.electric_usage_rate.feed_in_tariff,
+        annual_day_usage:
+          responseNewElectricityData.data.electric_usage_rate.annual_day_usage,
+        day_rate: responseNewElectricityData.data.electric_usage_rate.day_rate,
+        annual_night_usage:
+          responseNewElectricityData.data.electric_usage_rate
+            .annual_night_usage,
+        night_rate:
+          responseNewElectricityData.data.electric_usage_rate.night_rate,
+        annual_evening_usage:
+          responseNewElectricityData.data.electric_usage_rate
+            .annual_evening_usage,
+        evening_rate:
+          responseNewElectricityData.data.electric_usage_rate.evening_rate,
       };
       dispatchNSElectricityData({
         all: true,
@@ -134,6 +168,36 @@ const NewSupplyElectricity = () => {
       e_agent: NSElectricityData.e_agent,
       e_customer: NSElectricityData.e_customer,
     };
+    const electricUsageRate = {
+      electric_usage_rate: {
+        stading_charge: NSElectricityData.stading_charge,
+        standing_charge_uplift: NSElectricityData.standing_charge_uplift,
+        kva_rate: NSElectricityData.kva_rate,
+        unit_rate_uplift: NSElectricityData.unit_rate_uplift,
+        feed_in_tariff: NSElectricityData.feed_in_tariff,
+        annual_day_usage: NSElectricityData.annual_day_usage,
+        day_rate: NSElectricityData.day_rate,
+        annual_night_usage: NSElectricityData.annual_night_usage,
+        night_rate: NSElectricityData.night_rate,
+        annual_evening_usage: NSElectricityData.annual_evening_usage,
+        evening_rate: NSElectricityData.evening_rate,
+      },
+    };
+    if (
+      electricUsageRate.electric_usage_rate.stading_charge ||
+      electricUsageRate.electric_usage_rate.standing_charge_uplift ||
+      electricUsageRate.electric_usage_rate.kva_rate ||
+      electricUsageRate.electric_usage_rate.unit_rate_uplift ||
+      electricUsageRate.electric_usage_rate.feed_in_tariff ||
+      electricUsageRate.electric_usage_rate.annual_day_usage ||
+      electricUsageRate.electric_usage_rate.day_rate ||
+      electricUsageRate.electric_usage_rate.annual_night_usage ||
+      electricUsageRate.electric_usage_rate.night_rate ||
+      electricUsageRate.electric_usage_rate.annual_evening_usage ||
+      electricUsageRate.electric_usage_rate.evening_rate
+    ) {
+      sendData = { ...sendData, ...electricUsageRate };
+    }
     setNewElectricityResponseData(null);
     setStatus({ isLoading: true, isError: false });
     setNewElectricityReqData({
@@ -363,50 +427,157 @@ const NewSupplyElectricity = () => {
         <div className="mt-3 row">
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Standing Charge (pence/day)</Form.Label>
-            <Form.Control type="text" name="Standing Charge (pence/day)" />
+            <Form.Control
+              type="number"
+              name="Standing Charge (pence/day)"
+              value={NSElectricityData.stading_charge}
+              onChange={(e) =>
+                dispatchNSElectricityData({
+                  type: "stading_charge",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Standing Charge Uplift (pence/day)</Form.Label>
             <Form.Control
-              type="text"
+              type="number"
               name="Standing Charge Uplift (pence/day)"
+              value={NSElectricityData.standing_charge_uplift}
+              onChange={(e) =>
+                dispatchNSElectricityData({
+                  type: "standing_charge_uplift",
+                  value: e.target.value,
+                })
+              }
             />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
-            <Form.Label>Rate (pence/kWh)</Form.Label>
-            <Form.Control type="text" name="Rate (pence/kWh)" />
+            <Form.Label>kVA Rate (pence/kWh)</Form.Label>
+            <Form.Control
+              type="number"
+              name="kVA Rate (pence/kWh)"
+              value={NSElectricityData.kva_rate}
+              onChange={(e) =>
+                dispatchNSElectricityData({
+                  type: "kva_rate",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Unit Rate Uplift</Form.Label>
-            <Form.Control type="text" name="Unit Rate Uplift" />
+            <Form.Control
+              type="number"
+              name="Unit Rate Uplift"
+              value={NSElectricityData.unit_rate_uplift}
+              onChange={(e) =>
+                dispatchNSElectricityData({
+                  type: "unit_rate_uplift",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Feed-in Tariff (FiT)</Form.Label>
-            <Form.Control type="text" name="Feed-in Tariff (FiT)" />
+            <Form.Control
+              type="number"
+              name="Feed-in Tariff (FiT)"
+              value={NSElectricityData.feed_in_tariff}
+              onChange={(e) =>
+                dispatchNSElectricityData({
+                  type: "feed_in_tariff",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Annual Day Usage (kWh)</Form.Label>
-            <Form.Control type="text" name="Annual Day Usage (kWh)" />
+            <Form.Control
+              type="number"
+              name="Annual Day Usage (kWh)"
+              value={NSElectricityData.annual_day_usage}
+              onChange={(e) =>
+                dispatchNSElectricityData({
+                  type: "annual_day_usage",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Day Rate (pence/kWh)</Form.Label>
-            <Form.Control type="text" name="Day Rate (pence/kWh)" />
+            <Form.Control
+              type="number"
+              name="Day Rate (pence/kWh)"
+              value={NSElectricityData.day_rate}
+              onChange={(e) =>
+                dispatchNSElectricityData({
+                  type: "day_rate",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Annual Night Usage (kWh)</Form.Label>
-            <Form.Control type="text" name="Annual Night Usage (kWh)" />
+            <Form.Control
+              type="number"
+              name="Annual Night Usage (kWh)"
+              value={NSElectricityData.annual_night_usage}
+              onChange={(e) =>
+                dispatchNSElectricityData({
+                  type: "annual_night_usage",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Night Rate (pence/kWh)</Form.Label>
-            <Form.Control type="text" name="Night Rate (pence/kWh)" />
+            <Form.Control
+              type="number"
+              name="Night Rate (pence/kWh)"
+              value={NSElectricityData.night_rate}
+              onChange={(e) =>
+                dispatchNSElectricityData({
+                  type: "night_rate",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Annual Evening/Weekend Usage</Form.Label>
-            <Form.Control type="text" name="Annual Evening/Weekend Usage" />
+            <Form.Control
+              type="number"
+              name="Annual Evening/Weekend Usage"
+              value={NSElectricityData.annual_evening_usage}
+              onChange={(e) =>
+                dispatchNSElectricityData({
+                  type: "annual_evening_usage",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Evening/Weekend Rate (pence/kWh)</Form.Label>
-            <Form.Control type="text" name="Evening/Weekend Rate (pence/kWh)" />
+            <Form.Control
+              type="number"
+              name="Evening/Weekend Rate (pence/kWh)"
+              value={NSElectricityData.evening_rate}
+              onChange={(e) =>
+                dispatchNSElectricityData({
+                  type: "evening_rate",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <div className="d-flex gap-4 mb-2">
             <div>Total Annual Usage (kWh) : 0.00</div>

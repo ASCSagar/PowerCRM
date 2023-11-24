@@ -23,6 +23,11 @@ const initialNSG = {
   g_notes: "",
   g_agent: false,
   g_customer: false,
+  stading_charge: "",
+  standing_charge_uplift: "",
+  unit_rate_uplift: "",
+  rate: "",
+  annual_usage: "",
 };
 
 const reducerNSG = (state, action) => {
@@ -100,6 +105,13 @@ const NewSupplyGas = () => {
         g_notes: responseNewGasData.data.g_notes,
         g_agent: responseNewGasData.data.g_agent,
         g_customer: responseNewGasData.data.g_customer,
+        stading_charge: responseNewGasData.data.gas_usage_rate.stading_charge,
+        standing_charge_uplift:
+          responseNewGasData.data.gas_usage_rate.standing_charge_uplift,
+        unit_rate_uplift:
+          responseNewGasData.data.gas_usage_rate.unit_rate_uplift,
+        rate: responseNewGasData.data.gas_usage_rate.rate,
+        annual_usage: responseNewGasData.data.gas_usage_rate.annual_usage,
       };
       dispatchNSGasData({
         all: true,
@@ -127,6 +139,24 @@ const NewSupplyGas = () => {
       g_agent: NSGasData.g_agent,
       g_customer: NSGasData.g_customer,
     };
+    const gasUsageRate = {
+      gas_usage_rate: {
+        stading_charge: NSGasData.stading_charge,
+        standing_charge_uplift: NSGasData.standing_charge_uplift,
+        unit_rate_uplift: NSGasData.unit_rate_uplift,
+        rate: NSGasData.rate,
+        annual_usage: NSGasData.annual_usage,
+      },
+    };
+    if (
+      gasUsageRate.gas_usage_rate.stading_charge ||
+      gasUsageRate.gas_usage_rate.standing_charge_uplift ||
+      gasUsageRate.gas_usage_rate.rate ||
+      gasUsageRate.gas_usage_rate.unit_rate_uplift ||
+      gasUsageRate.gas_usage_rate.annual_usage
+    ) {
+      sendData = { ...sendData, ...gasUsageRate };
+    }
     setNewGasResponseData(null);
     setStatus({ isLoading: true, isError: false });
     setNewGasReqData({
@@ -356,26 +386,73 @@ const NewSupplyGas = () => {
         <div className="mt-3 row">
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Standing Charge (pence/day)</Form.Label>
-            <Form.Control type="text" name="Standing Charge (pence/day)" />
+            <Form.Control
+              type="number"
+              name="Standing Charge (pence/day)"
+              value={NSGasData.standing_charge}
+              onChange={(e) =>
+                dispatchNSGasData({
+                  type: "stading_charge",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Standing Charge Uplift (pence/day)</Form.Label>
             <Form.Control
-              type="text"
+              type="number"
               name="Standing Charge Uplift (pence/day)"
+              value={NSGasData.standing_charge_uplift}
+              onChange={(e) =>
+                dispatchNSGasData({
+                  type: "standing_charge_uplift",
+                  value: e.target.value,
+                })
+              }
             />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Rate (pence/kWh)</Form.Label>
-            <Form.Control type="text" name="Rate (pence/kWh)" />
+            <Form.Control
+              type="number"
+              name="Rate (pence/kWh)"
+              value={NSGasData.rate}
+              onChange={(e) =>
+                dispatchNSGasData({
+                  type: "rate",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Unit Rate Uplift</Form.Label>
-            <Form.Control type="text" name="Unit Rate Uplift" />
+            <Form.Control
+              type="number"
+              name="Unit Rate Uplift"
+              value={NSGasData.unit_rate_uplift}
+              onChange={(e) =>
+                dispatchNSGasData({
+                  type: "unit_rate_uplift",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Annual Usage (KWH)</Form.Label>
-            <Form.Control type="text" name="Annual Usage (KWH)" />
+            <Form.Control
+              type="number"
+              name="Annual Usage (KWH)"
+              value={NSGasData.annual_usage}
+              onChange={(e) =>
+                dispatchNSGasData({
+                  type: "annual_usage",
+                  value: e.target.value,
+                })
+              }
+            />
           </Form.Group>
           <div className="d-flex gap-4 mb-2">
             <div>Total Commission (£) : 0.00</div>

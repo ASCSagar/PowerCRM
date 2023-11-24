@@ -22,6 +22,11 @@ const initialCSG = {
   g_supplier_information3: "",
   g_agent: false,
   g_customer: false,
+  stading_charge: "",
+  standing_charge_uplift: "",
+  unit_rate_uplift: "",
+  rate: "",
+  annual_usage: "",
 };
 
 const reducerCSG = (state, action) => {
@@ -99,6 +104,14 @@ const CurrentSupplyGas = () => {
           responseCurrentGasData.data.g_supplier_information3,
         g_agent: responseCurrentGasData.data.g_agent,
         g_customer: responseCurrentGasData.data.g_customer,
+        stading_charge:
+          responseCurrentGasData.data.gas_usage_rate.stading_charge,
+        standing_charge_uplift:
+          responseCurrentGasData.data.gas_usage_rate.standing_charge_uplift,
+        unit_rate_uplift:
+          responseCurrentGasData.data.gas_usage_rate.unit_rate_uplift,
+        rate: responseCurrentGasData.data.gas_usage_rate.rate,
+        annual_usage: responseCurrentGasData.data.gas_usage_rate.annual_usage,
       };
       dispatchCSGasData({
         all: true,
@@ -125,6 +138,24 @@ const CurrentSupplyGas = () => {
       g_agent: CSGasData.g_agent,
       g_customer: CSGasData.g_customer,
     };
+    const gasUsageRate = {
+      gas_usage_rate: {
+        stading_charge: CSGasData.stading_charge,
+        standing_charge_uplift: CSGasData.standing_charge_uplift,
+        unit_rate_uplift: CSGasData.unit_rate_uplift,
+        rate: CSGasData.rate,
+        annual_usage: CSGasData.annual_usage,
+      },
+    };
+    if (
+      gasUsageRate.gas_usage_rate.stading_charge ||
+      gasUsageRate.gas_usage_rate.standing_charge_uplift ||
+      gasUsageRate.gas_usage_rate.rate ||
+      gasUsageRate.gas_usage_rate.unit_rate_uplift ||
+      gasUsageRate.gas_usage_rate.annual_usage
+    ) {
+      sendData = { ...sendData, ...gasUsageRate };
+    }
     setCurrentGasResponseData(null);
     setStatus({ isLoading: true, isError: false });
     setCurrentGasReqData({
@@ -340,26 +371,73 @@ const CurrentSupplyGas = () => {
         <div className="mt-3 row">
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Standing Charge (pence/day)</Form.Label>
-            <Form.Control type="text" name="Standing Charge (pence/day)" />
+            <Form.Control
+              type="number"
+              name="Standing Charge (pence/day)"
+              value={CSGasData.stading_charge}
+              onChange={(e) => {
+                dispatchCSGasData({
+                  type: "stading_charge",
+                  value: e.target.value,
+                });
+              }}
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Standing Charge Uplift (pence/day)</Form.Label>
             <Form.Control
-              type="text"
+              type="number"
               name="Standing Charge Uplift (pence/day)"
+              value={CSGasData.standing_charge_uplift}
+              onChange={(e) => {
+                dispatchCSGasData({
+                  type: "standing_charge_uplift",
+                  value: e.target.value,
+                });
+              }}
             />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Rate (pence/kWh)</Form.Label>
-            <Form.Control type="text" name="Rate (pence/kWh)" />
+            <Form.Control
+              type="number"
+              name="Rate (pence/kWh)"
+              value={CSGasData.rate}
+              onChange={(e) => {
+                dispatchCSGasData({
+                  type: "rate",
+                  value: e.target.value,
+                });
+              }}
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Unit Rate Uplift</Form.Label>
-            <Form.Control type="text" name="Unit Rate Uplift" />
+            <Form.Control
+              type="number"
+              name="Unit Rate Uplift"
+              value={CSGasData.unit_rate_uplift}
+              onChange={(e) => {
+                dispatchCSGasData({
+                  type: "unit_rate_uplift",
+                  value: e.target.value,
+                });
+              }}
+            />
           </Form.Group>
           <Form.Group className="mb-3 col-md-3">
             <Form.Label>Annual Usage (KWH)</Form.Label>
-            <Form.Control type="text" name="Annual Usage (KWH)" />
+            <Form.Control
+              type="number"
+              name="Annual Usage (KWH)"
+              value={CSGasData.annual_usage}
+              onChange={(e) => {
+                dispatchCSGasData({
+                  type: "annual_usage",
+                  value: e.target.value,
+                });
+              }}
+            />
           </Form.Group>
           <div className="d-flex gap-4 mb-2">
             <div>Total Commission (£) : 0.00</div>
