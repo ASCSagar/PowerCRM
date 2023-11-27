@@ -1,8 +1,8 @@
 import "./assets/css/custom.css";
 import "../src/assets/css/neumorphism.css";
-import './assets/css/auth-boxed.css';
-import './assets/css/main.css';
-import './assets/css/structure.css';
+import "./assets/css/auth-boxed.css";
+import "./assets/css/main.css";
+import "./assets/css/structure.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
@@ -25,6 +25,7 @@ import GroupQuotes from "./pages/QuoteGroup/GroupQuotes";
 import AddGroupQuote from "./pages/QuoteGroup/AddGroupQuote";
 import EditGroupQuote from "./pages/QuoteGroup/EditGroupQuote";
 import Notes from "./pages/Notes/Notes";
+import LookUp from "./pages/LookUp/LookUp";
 
 const router = createBrowserRouter(
   [
@@ -107,6 +108,10 @@ const router = createBrowserRouter(
         {
           path: "notes/edit/:noteId",
           element: <Notes />,
+        },
+        {
+          path: "lookup",
+          element: <LookUp />,
         },
       ],
     },

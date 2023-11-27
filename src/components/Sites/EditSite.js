@@ -3,7 +3,7 @@ import { Button, Form, Tab, Tabs } from "react-bootstrap";
 import SelectionBox from "../Form/SelectionBox";
 import SelectSearch from "react-select-search";
 import useFetch from "../../hooks/useFetch";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import LoadingData from "../UI/LoadingData";
 import NeumorphismWrapper from "../UI/Layouts/NeumorphismWrapper";
 
@@ -623,7 +623,10 @@ function EditSite() {
                     }
                   />
                 </Form.Group>
-                <Form.Group className="mb-3 col-12" controlId="loa_header_to_use">
+                <Form.Group
+                  className="mb-3 col-12"
+                  controlId="loa_header_to_use"
+                >
                   <Form.Label>LOA Header To Use</Form.Label>
                   <SelectSearch
                     options={[
@@ -656,6 +659,18 @@ function EditSite() {
               <Tab eventKey={3} title="Site Address">
                 <Form.Group className="mb-3 col-12" controlId="sitePostCode">
                   <Form.Label>Postcode</Form.Label>
+                  <Link to="/lookup" className="ml-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-search"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                    </svg>
+                  </Link>
                   <Form.Control
                     type="text"
                     name="sitePostCode"
@@ -673,6 +688,18 @@ function EditSite() {
                   controlId="siteAddressLine1"
                 >
                   <Form.Label>Address Line 1</Form.Label>
+                  <Link to="/lookup" className="ml-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-search"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                    </svg>
+                  </Link>
                   <Form.Control
                     type="text"
                     name="siteAddressLine1"
@@ -690,6 +717,18 @@ function EditSite() {
                   controlId="siteAddressLine2"
                 >
                   <Form.Label>Address Line 2</Form.Label>
+                  <Link to="/lookup" className="ml-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-search"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                    </svg>
+                  </Link>
                   <Form.Control
                     type="text"
                     name="siteAddressLine2"
@@ -707,6 +746,18 @@ function EditSite() {
                   controlId="siteAddressLine3"
                 >
                   <Form.Label>Address Line 3</Form.Label>
+                  <Link to="/lookup" className="ml-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-search"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                    </svg>
+                  </Link>
                   <Form.Control
                     type="text"
                     name="siteAddressLine3"
@@ -724,6 +775,18 @@ function EditSite() {
                   controlId="siteAddressLine4"
                 >
                   <Form.Label>Address Line 4</Form.Label>
+                  <Link to="/lookup" className="ml-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-search"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                    </svg>
+                  </Link>
                   <Form.Control
                     type="text"
                     name="siteAddressLine4"

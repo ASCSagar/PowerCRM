@@ -3,7 +3,7 @@ import { Button, Form, Tab, Tabs } from "react-bootstrap";
 import SelectionBox from "../../components/Form/SelectionBox";
 import SelectSearch from "react-select-search";
 import useFetch from "../../hooks/useFetch";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import LoadingData from "../../components/UI/LoadingData";
 import NeumorphismWrapper from "../../components/UI/Layouts/NeumorphismWrapper";
 
@@ -304,500 +304,527 @@ function EditCompany() {
           <h4>Company Details</h4>
         </div>
         <div id="tabsSimple" className=" layout-spacing"></div>
-          <Form onSubmit={editCompany}>
-            <Tabs
-              activeKey={key}
-              onSelect={(k) => setKey(+k)}
-              id="controlled-tab-example"
-              className="mb-3"
-            >
-              <Tab eventKey={0} title="Company Info">
-                <Form.Group className="mb-3 col-12" controlId="name">
-                  <Form.Label>Name Of Company</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="name"
-                    value={companyData.name}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "name",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3 col-12" controlId="parentCompany">
-                  <Form.Label>Parent Company</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="parentCompany"
-                    value={companyData.parentCompany}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "parentCompany",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3 col-12" controlId="reference">
-                  <Form.Label>Reference</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="reference"
-                    value={companyData.reference}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "reference",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group
-                  className="mb-3 col-12"
-                  controlId="numberOfEmployees"
-                >
-                  <Form.Label>Number Of Employees</Form.Label>
-                  <Form.Control
-                    type="number"
-                    name="numberOfEmployees"
-                    value={companyData.numberOfEmployees}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "numberOfEmployees",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3 col-12" controlId="registrationNo">
-                  <Form.Label>Registration Number</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="registrationNo"
-                    className="mb-3"
-                    value={companyData.registrationNo}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "registrationNo",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                  <SelectionBox
-                    groupclassName="mb-3 col-md-6 selectbox"
-                    groupId="business_type"
-                    label="Company Type"
-                    value={companyData.business_type}
-                    onChange={handleSelectionChange.bind(null, "business_type")}
-                    name="business_type"
-                    isSearch={true}
-                    objKey="name"
-                    url="company-types/"
-                  />
-                </Form.Group>
-                <Form.Group
-                  className="mb-3 col-12"
-                  controlId="estimatedTurnover"
-                >
-                  <Form.Label>Estimated Turnover</Form.Label>
-                  <Form.Control
-                    type="number"
-                    name="estimatedTurnover"
-                    value={companyData.estimatedTurnover}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "estimatedTurnover",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group className="col-12" controlId="isMacroBusiness">
-                  <Form.Check
-                    type="switch"
-                    id="custom-switch"
-                    label="Micro Business"
-                    checked={companyData.isMacroBusiness}
-                    onChange={(e) => {
-                      dispatchInputChange({
-                        type: "isMacroBusiness",
-                        value: e.target.checked,
-                      });
-                    }}
-                  />
-                </Form.Group>
-              </Tab>
-              <Tab eventKey={1} title="Company Address">
-                <Form.Group
-                  className="mb-3 col-12"
-                  controlId="addressline1Company"
-                >
-                  <Form.Label>Address Line 1</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="addressline1Company"
-                    value={companyData.addressline1Company}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "addressline1Company",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group
-                  className="mb-3 col-12"
-                  controlId="addressline2Company"
-                >
-                  <Form.Label>Address Line 2</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="addressline2Company"
-                    value={companyData.addressline2Company}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "addressline2Company",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group
-                  className="mb-3 col-12"
-                  controlId="addressline3Company"
-                >
-                  <Form.Label>Address Line 3</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="addressline3Company"
-                    value={companyData.addressline3Company}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "addressline3Company",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3 col-12" controlId="postCode">
-                  <Form.Label>Postcode</Form.Label>
-                  <Form.Control
-                    type="number"
-                    name="postCode"
-                    value={companyData.postCode}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "postCode",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group
-                  className="mb-3 col-12"
-                  controlId="countryOfCompany"
-                >
-                  <Form.Label>Country</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="countryOfCompany"
-                    value={companyData.countryOfCompany}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "countryOfCompany",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-              </Tab>
-              <Tab eventKey={2} title="Bank Details">
-                <Form.Group className="mb-3 col-12" controlId="accountName">
-                  <Form.Label>Account Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="accountName"
-                    value={companyData.accountName}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "accountName",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3 col-12" controlId="bankName">
-                  <Form.Label>Bank Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="bankName"
-                    value={companyData.bankName}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "bankName",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3 col-12" controlId="accountNo">
-                  <Form.Label>Account No</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="accountNo"
-                    value={companyData.accountNo}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "accountNo",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3 col-12" controlId="shortCode">
-                  <Form.Label>Shortcode</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="shortCode"
-                    value={companyData.shortCode}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "shortCode",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3 col-12" controlId="sic_code">
-                  <Form.Label>SIC Code</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="sic_code"
-                    value={companyData.sic_code}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "sic_code",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-              </Tab>
-              <Tab eventKey={3} title="Partner Details">
-                <Form.Group className="mb-3 col-12" controlId="partnerName">
-                  <Form.Label>Partner Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="partnerName"
-                    value={companyData.partnerName}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "partnerName",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3 col-12" controlId="partnerDob">
-                  <Form.Label>Partner DOB</Form.Label>
-                  <Form.Control
-                    type="date"
-                    name="partnerDob"
-                    value={companyData.partnerDob}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "partnerDob",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="address">
-                  <Form.Label>Address</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    name="address"
-                    value={companyData.address}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "address",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3 col-12" controlId="homePostCode">
-                  <Form.Label>Home Postcode</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="homePostCode"
-                    value={companyData.homePostCode}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "homePostCode",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group
-                  className="mb-3 col-12"
-                  controlId="timeAtAddressYears"
-                >
-                  <Form.Label>Time At Address (Years)</Form.Label>
-                  <Form.Control
-                    type="number"
-                    name="timeAtAddressYears"
-                    value={companyData.timeAtAddressYears}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "timeAtAddressYears",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group
-                  className="mb-3 col-12"
-                  controlId="timeAtAddressMonths"
-                >
-                  <Form.Label>Time At Address (Months)</Form.Label>
-                  <Form.Control
-                    type="number"
-                    name="timeAtAddressMonths"
-                    value={companyData.timeAtAddressMonths}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "timeAtAddressMonths",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-              </Tab>
-              <Tab eventKey={4} title="Contacts ">
-                <Form.Group className="mb-3 col-12" controlId="firstName">
-                  <Form.Label>First Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="firstName"
-                    value={companyData.firstName}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "firstName",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3 col-12" controlId="lastName">
-                  <Form.Label>Last Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="lastName"
-                    value={companyData.lastName}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "lastName",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3 col-12" controlId="contactTitle">
-                  <Form.Label>Contact Title</Form.Label>
-                  <SelectSearch
-                    options={[
-                      { name: "Sir", value: "Sir" },
-                      { name: "Mr", value: "Mr" },
-                      { name: "Ms", value: "Ms" },
-                      { name: "Mrs", value: "Mrs" },
-                      { name: "Miss", value: "Miss" },
-                      { name: "Dr", value: "Dr" },
-                    ]}
-                    placeholder="Choose from options"
-                    value={companyData.contactTitle}
-                    onChange={(val) => {
-                      dispatchInputChange({
-                        type: "contactTitle",
-                        value: val,
-                      });
-                    }}
-                    name="contactTitle"
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3 col-12" controlId="position">
-                  <Form.Label>Position </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="position"
-                    value={companyData.position}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "position",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3 col-12" controlId="telephoneNumber">
-                  <Form.Label>Telephone Number </Form.Label>
-                  <Form.Control
-                    type="number"
-                    name="telephoneNumber"
-                    value={companyData.telephoneNumber}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "telephoneNumber",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3 col-12" controlId="email">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    name="email"
-                    value={companyData.email}
-                    onChange={(e) =>
-                      dispatchInputChange({
-                        type: "email",
-                        value: e.target.value,
-                      })
-                    }
-                  />
-                </Form.Group>
-              </Tab>
-            </Tabs>
-            <div className="col-md-12 centerBtn">
-              {err?.length ? <p className="dengor">{err}</p> : ""}
-              {key === 0 ? (
-                ""
-              ) : (
-                <Button
-                  type="button"
-                  className="mx-2"
-                  onClick={changeTab.bind(null, false)}
-                >
-                  Prev
-                </Button>
-              )}
-              <Button type="submit">
-                {reqCompanyStatus.isLoading ? "Submitting" : "Submit"}
+        <Form onSubmit={editCompany}>
+          <Tabs
+            activeKey={key}
+            onSelect={(k) => setKey(+k)}
+            id="controlled-tab-example"
+            className="mb-3"
+          >
+            <Tab eventKey={0} title="Company Info">
+              <Form.Group className="mb-3 col-12" controlId="name">
+                <Form.Label>Company Name</Form.Label>
+                <Link to="/lookup" className="ml-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-search"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                  </svg>
+                </Link>
+                <Form.Control
+                  type="text"
+                  name="name"
+                  value={companyData.name}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "name",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 col-12" controlId="parentCompany">
+                <Form.Label>Parent Company</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="parentCompany"
+                  value={companyData.parentCompany}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "parentCompany",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 col-12" controlId="reference">
+                <Form.Label>Reference</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="reference"
+                  value={companyData.reference}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "reference",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 col-12" controlId="numberOfEmployees">
+                <Form.Label>Number Of Employees</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="numberOfEmployees"
+                  value={companyData.numberOfEmployees}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "numberOfEmployees",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 col-12" controlId="registrationNo">
+                <Form.Label>Registration Number</Form.Label>
+                <Link to="/lookup" className="ml-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-search"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                  </svg>
+                </Link>
+                <Form.Control
+                  type="text"
+                  name="registrationNo"
+                  className="mb-3"
+                  value={companyData.registrationNo}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "registrationNo",
+                      value: e.target.value,
+                    })
+                  }
+                />
+                <SelectionBox
+                  groupclassName="mb-3 col-md-6 selectbox"
+                  groupId="business_type"
+                  label="Company Type"
+                  value={companyData.business_type}
+                  onChange={handleSelectionChange.bind(null, "business_type")}
+                  name="business_type"
+                  isSearch={true}
+                  objKey="name"
+                  url="company-types/"
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 col-12" controlId="estimatedTurnover">
+                <Form.Label>Estimated Turnover</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="estimatedTurnover"
+                  value={companyData.estimatedTurnover}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "estimatedTurnover",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="col-12" controlId="isMacroBusiness">
+                <Form.Check
+                  type="switch"
+                  id="custom-switch"
+                  label="Micro Business"
+                  checked={companyData.isMacroBusiness}
+                  onChange={(e) => {
+                    dispatchInputChange({
+                      type: "isMacroBusiness",
+                      value: e.target.checked,
+                    });
+                  }}
+                />
+              </Form.Group>
+            </Tab>
+            <Tab eventKey={1} title="Company Address">
+              <Form.Group
+                className="mb-3 col-12"
+                controlId="addressline1Company"
+              >
+                <Form.Label>Address Line 1</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="addressline1Company"
+                  value={companyData.addressline1Company}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "addressline1Company",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3 col-12"
+                controlId="addressline2Company"
+              >
+                <Form.Label>Address Line 2</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="addressline2Company"
+                  value={companyData.addressline2Company}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "addressline2Company",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3 col-12"
+                controlId="addressline3Company"
+              >
+                <Form.Label>Address Line 3</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="addressline3Company"
+                  value={companyData.addressline3Company}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "addressline3Company",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 col-12" controlId="postCode">
+                <Form.Label>Postcode</Form.Label>
+                <Link to="/lookup" className="ml-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-search"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                  </svg>
+                </Link>
+                <Form.Control
+                  type="number"
+                  name="postCode"
+                  value={companyData.postCode}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "postCode",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 col-12" controlId="countryOfCompany">
+                <Form.Label>Country</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="countryOfCompany"
+                  value={companyData.countryOfCompany}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "countryOfCompany",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+            </Tab>
+            <Tab eventKey={2} title="Bank Details">
+              <Form.Group className="mb-3 col-12" controlId="accountName">
+                <Form.Label>Account Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="accountName"
+                  value={companyData.accountName}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "accountName",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 col-12" controlId="bankName">
+                <Form.Label>Bank Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="bankName"
+                  value={companyData.bankName}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "bankName",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 col-12" controlId="accountNo">
+                <Form.Label>Account No</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="accountNo"
+                  value={companyData.accountNo}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "accountNo",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 col-12" controlId="shortCode">
+                <Form.Label>Shortcode</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="shortCode"
+                  value={companyData.shortCode}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "shortCode",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 col-12" controlId="sic_code">
+                <Form.Label>SIC Code</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="sic_code"
+                  value={companyData.sic_code}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "sic_code",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+            </Tab>
+            <Tab eventKey={3} title="Partner Details">
+              <Form.Group className="mb-3 col-12" controlId="partnerName">
+                <Form.Label>Partner Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="partnerName"
+                  value={companyData.partnerName}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "partnerName",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 col-12" controlId="partnerDob">
+                <Form.Label>Partner DOB</Form.Label>
+                <Form.Control
+                  type="date"
+                  name="partnerDob"
+                  value={companyData.partnerDob}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "partnerDob",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="address">
+                <Form.Label>Address</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  name="address"
+                  value={companyData.address}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "address",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 col-12" controlId="homePostCode">
+                <Form.Label>Home Postcode</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="homePostCode"
+                  value={companyData.homePostCode}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "homePostCode",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3 col-12"
+                controlId="timeAtAddressYears"
+              >
+                <Form.Label>Time At Address (Years)</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="timeAtAddressYears"
+                  value={companyData.timeAtAddressYears}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "timeAtAddressYears",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3 col-12"
+                controlId="timeAtAddressMonths"
+              >
+                <Form.Label>Time At Address (Months)</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="timeAtAddressMonths"
+                  value={companyData.timeAtAddressMonths}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "timeAtAddressMonths",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+            </Tab>
+            <Tab eventKey={4} title="Contacts ">
+              <Form.Group className="mb-3 col-12" controlId="firstName">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="firstName"
+                  value={companyData.firstName}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "firstName",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 col-12" controlId="lastName">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="lastName"
+                  value={companyData.lastName}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "lastName",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 col-12" controlId="contactTitle">
+                <Form.Label>Contact Title</Form.Label>
+                <SelectSearch
+                  options={[
+                    { name: "Sir", value: "Sir" },
+                    { name: "Mr", value: "Mr" },
+                    { name: "Ms", value: "Ms" },
+                    { name: "Mrs", value: "Mrs" },
+                    { name: "Miss", value: "Miss" },
+                    { name: "Dr", value: "Dr" },
+                  ]}
+                  placeholder="Choose from options"
+                  value={companyData.contactTitle}
+                  onChange={(val) => {
+                    dispatchInputChange({
+                      type: "contactTitle",
+                      value: val,
+                    });
+                  }}
+                  name="contactTitle"
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 col-12" controlId="position">
+                <Form.Label>Position </Form.Label>
+                <Form.Control
+                  type="text"
+                  name="position"
+                  value={companyData.position}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "position",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 col-12" controlId="telephoneNumber">
+                <Form.Label>Telephone Number </Form.Label>
+                <Form.Control
+                  type="number"
+                  name="telephoneNumber"
+                  value={companyData.telephoneNumber}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "telephoneNumber",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 col-12" controlId="email">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  value={companyData.email}
+                  onChange={(e) =>
+                    dispatchInputChange({
+                      type: "email",
+                      value: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+            </Tab>
+          </Tabs>
+          <div className="col-md-12 centerBtn">
+            {err?.length ? <p className="dengor">{err}</p> : ""}
+            {key === 0 ? (
+              ""
+            ) : (
+              <Button
+                type="button"
+                className="mx-2"
+                onClick={changeTab.bind(null, false)}
+              >
+                Prev
               </Button>
-              {key === 4 ? (
-                " "
-              ) : (
-                <Button type="button" className="mx-2" onClick={changeTab}>
-                  Next
-                </Button>
-              )}
-            </div>
-          </Form>
+            )}
+            <Button type="submit">
+              {reqCompanyStatus.isLoading ? "Submitting" : "Submit"}
+            </Button>
+            {key === 4 ? (
+              " "
+            ) : (
+              <Button type="button" className="mx-2" onClick={changeTab}>
+                Next
+              </Button>
+            )}
+          </div>
+        </Form>
       </NeumorphismWrapper>
     </>
   );
