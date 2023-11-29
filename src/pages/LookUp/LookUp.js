@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import NeumorphismWrapper from "../../components/UI/Layouts/NeumorphismWrapper";
 import { Button, Form } from "react-bootstrap";
 import SelectSearch from "react-select-search";
+import { useSelector } from "react-redux";
 
 const LookUp = () => {
+  const authData = useSelector((state) => state.authStore);
+
   const [formData, setFormData] = useState({
     lType: "Company",
     l_company_search: "",
@@ -20,6 +23,41 @@ const LookUp = () => {
     s_g_serialNumber: "",
     s_mprn: "",
   });
+
+  const [apiData, setApiData] = useState([]);
+
+  let token =
+    "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImFmODU2ZDA0LWFjZDAtNDU2NC1iYjBjLWJlMjk0NGY3MWQ5MiIsInN1YiI6InNydWphbkB3aW5wb3dlcmRpcmVjdC5jby51ayIsImVtYWlsIjoic3J1amFuQHdpbnBvd2VyZGlyZWN0LmNvLnVrIiwianRpIjoiOGFhZjZmYmMtNmQ1Yy00ZWJlLWFhMDMtMWM2MTJjMDhiYzkzIiwibmJmIjoxNzAxMTY0ODQ3LCJleHAiOjE3MDExNjUxNDcsImlhdCI6MTcwMTE2NDg0NywiaXNzIjoiRW5lcmd5IExvb2t1cCIsImF1ZCI6Imh0dHBzOi8vYXBpLmxvb2t1cC5FbmVyZ3kifQ.JbdZtALXMcZ3fQDzjNVPvOZ6OdahniESXqk4u08TiCqiLyaD9_i9qf_41IO98dFN8dJexP3yqumONvV3cY26Jw";
+
+  const jsonData = JSON.stringify({
+    query: "SW19 2RR",
+    isQueryTicket: true,
+  });
+
+  const fetchData = async () => {
+    try {
+      let response = await fetch("/api/Property/SearchByPostcode", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: jsonData,
+        redirect: "follow",
+      });
+      const data = await response.json();
+      setApiData(data);
+    } catch (error) {
+      console.error("---Error--->", error);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchData();
+  };
+
+  console.log("--APIData--->", apiData);
   return (
     <>
       <NeumorphismWrapper>
@@ -277,7 +315,7 @@ const LookUp = () => {
               </Form.Group>
             )}
             <div className="mt-3 col-md-12 text-center">
-              <Button variant="primary" type="submit">
+              <Button onClick={handleSubmit} variant="primary" type="submit">
                 Search
               </Button>
             </div>
