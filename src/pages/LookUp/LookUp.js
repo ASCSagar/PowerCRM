@@ -29,12 +29,15 @@ const LookUp = () => {
   let token =
     "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImFmODU2ZDA0LWFjZDAtNDU2NC1iYjBjLWJlMjk0NGY3MWQ5MiIsInN1YiI6InNydWphbkB3aW5wb3dlcmRpcmVjdC5jby51ayIsImVtYWlsIjoic3J1amFuQHdpbnBvd2VyZGlyZWN0LmNvLnVrIiwianRpIjoiOGFhZjZmYmMtNmQ1Yy00ZWJlLWFhMDMtMWM2MTJjMDhiYzkzIiwibmJmIjoxNzAxMTY0ODQ3LCJleHAiOjE3MDExNjUxNDcsImlhdCI6MTcwMTE2NDg0NywiaXNzIjoiRW5lcmd5IExvb2t1cCIsImF1ZCI6Imh0dHBzOi8vYXBpLmxvb2t1cC5FbmVyZ3kifQ.JbdZtALXMcZ3fQDzjNVPvOZ6OdahniESXqk4u08TiCqiLyaD9_i9qf_41IO98dFN8dJexP3yqumONvV3cY26Jw";
 
+  console.log("----Site--Postcode----->", formData.s_postcode);
+
   const jsonData = JSON.stringify({
-    query: "SW19 2RR",
+    query: formData.s_postcode,
     isQueryTicket: true,
   });
-
+  
   const fetchData = async () => {
+    console.log("---JsonData---->", jsonData);
     try {
       let response = await fetch("/api/Property/SearchByPostcode", {
         method: "POST",
@@ -200,7 +203,7 @@ const LookUp = () => {
               <Form.Group className="mt-1 col-md-3">
                 <Form.Label>Postcode</Form.Label>
                 <Form.Control
-                  type="number"
+                  type="text"
                   name="Site Postcode"
                   value={formData.s_postcode}
                   onChange={(e) =>
