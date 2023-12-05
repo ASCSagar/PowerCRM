@@ -41,10 +41,7 @@ function useFetch() {
 
   // function starts
   const fetchReq = async function (url, fetchObj) {
-    const request = await fetch(
-      `https://aumhealthresort.com/powercrmlatest/api/${url}`,
-      fetchObj
-    );
+    const request = await fetch(`http://65.20.84.83:8000/api/${url}`, fetchObj);
     let response = null;
     if (request.ok) {
       response = await request.json();
