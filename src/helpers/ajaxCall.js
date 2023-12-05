@@ -1,6 +1,6 @@
 function ajaxCall(subUrl, header, method, postData) {
   // console.log(`url is : https://flyurdream.online/api/${subUrl}`);
-  return fetch(`https://aumhealthresort.com/powercrmlatest/api/${subUrl}`, {
+  return fetch(`http://65.20.84.83:8000/api/${subUrl}`, {
     headers: header,
     method: method,
     body: postData,
@@ -28,7 +28,7 @@ function ajaxCall(subUrl, header, method, postData) {
 
 function ajaxCallWithoutBody(subUrl, header, method) {
   // console.log(`url is : https://flyurdream.online/api/${subUrl}`);
-  return fetch(`https://aumhealthresort.com/powercrmlatest/api/${subUrl}`, {
+  return fetch(`http://65.20.84.83:8000/api/${subUrl}`, {
     headers: header,
     method: method,
   })
@@ -55,7 +55,7 @@ function ajaxCallWithoutBody(subUrl, header, method) {
 
 function ajaxCallWithHeaderOnly(subUrl, header) {
   // console.log(`url is : https://flyurdream.online/api/${subUrl}`);
-  return fetch(`https://aumhealthresort.com/powercrmlatest/api/${subUrl}`, {
+  return fetch(`http://65.20.84.83:8000/api/${subUrl}`, {
     headers: header,
   })
     .then((response) => {
@@ -88,7 +88,7 @@ function ajaxCallWithHeaderOnly(subUrl, header) {
 
 function ajaxCallWithHeader(subUrl, header) {
   // console.log(`url is : https://flyurdream.online/api/${subUrl}`);
-  return fetch(`https://aumhealthresort.com/powercrmlatest/api/${subUrl}`, {
+  return fetch(`http://65.20.84.83:8000/api/${subUrl}`, {
     headers: header,
   })
     .then((response) => {
@@ -105,7 +105,7 @@ function ajaxCallWithHeader(subUrl, header) {
 
 function ajaxCallUnauthorized(subUrl, header, method, postData) {
   // console.log(`url is : https://flyurdream.online/api/${subUrl}`);
-  return fetch(`https://aumhealthresort.com/powercrmlatest/api/${subUrl}`, {
+  return fetch(`http://65.20.84.83:8000/api/${subUrl}`, {
     headers: header,
     method: method,
     body: postData,
