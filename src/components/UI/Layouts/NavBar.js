@@ -23,6 +23,7 @@ const NavBar = () => {
       })
     );
     deleteFromLocalStorage("loginInfo");
+    deleteFromLocalStorage("csrfToken");
     navigate(`/login`);
   };
   return (
@@ -57,19 +58,31 @@ const NavBar = () => {
           <div className="d-flex align-items-center">
             <Navbar className="">
               <Nav className="me-auto">
-                <Nav.Link as={NavLink} to="/companies" className="navigate-link">
+                <Nav.Link
+                  as={NavLink}
+                  to="/companies"
+                  className="navigate-link"
+                >
                   Company
                 </Nav.Link>
                 <Nav.Link as={NavLink} to="/sites" className="navigate-link">
                   Sites
                 </Nav.Link>
-                <Nav.Link as={NavLink} to="/group-sites" className="navigate-link">
+                <Nav.Link
+                  as={NavLink}
+                  to="/group-sites"
+                  className="navigate-link"
+                >
                   Group Sites
                 </Nav.Link>
                 <Nav.Link as={NavLink} to="/quotes" className="navigate-link">
                   Quotes
                 </Nav.Link>
-                <Nav.Link as={NavLink} to="/group-quotes" className="navigate-link">
+                <Nav.Link
+                  as={NavLink}
+                  to="/group-quotes"
+                  className="navigate-link"
+                >
                   Group Quotes
                 </Nav.Link>
                 <Nav.Link as={NavLink} to="/notes" className="navigate-link">
