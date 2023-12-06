@@ -41,7 +41,10 @@ function useFetch() {
 
   // function starts
   const fetchReq = async function (url, fetchObj) {
-    const request = await fetch(`http://engagepluse.com/api/${url}`, fetchObj);
+    const request = await fetch(
+      `https://aumhealthresort.com/powercrmlatest/api/${url}`,
+      fetchObj
+    );
     let response = null;
     if (request.ok) {
       response = await request.json();
