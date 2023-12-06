@@ -120,6 +120,7 @@ const router = createBrowserRouter(
       element: <Login />,
     },
   ],
+  { basename: "/powercrmlatest" }
 );
 
 function App() {

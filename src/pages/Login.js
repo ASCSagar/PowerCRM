@@ -30,20 +30,6 @@ function Login() {
   const [loginFormStatus, setLoginFormStatus] = useState(true);
   const [errorLogin, setErrorLogin] = useState("");
 
-  const fetchCsrfToken = async () => {
-    const apiUrl = "http://engagepluse.com/csrf/";
-    try {
-      const response = await fetch(apiUrl);
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const data = await response.text();
-      localStorage.setItem("csrfToken", data);
-    } catch (error) {
-      console.error("Fetch error:", error);
-    }
-  };
-
   //   custom hook for ajax calls
   const [
     sendReqData,
@@ -86,7 +72,6 @@ function Login() {
       type: "submitBtn",
       value: "Logging In",
     });
-    fetchCsrfToken();
     let body = {
       username: formData.userName,
       password: formData.password,

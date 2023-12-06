@@ -23,7 +23,6 @@ const NavBar = () => {
       })
     );
     deleteFromLocalStorage("loginInfo");
-    deleteFromLocalStorage("csrfToken");
     navigate(`/login`);
   };
   return (

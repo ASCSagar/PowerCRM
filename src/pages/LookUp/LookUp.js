@@ -24,13 +24,10 @@ const LookUp = () => {
     s_mprn: "",
   });
 
-  const csrfToken = JSON.parse(localStorage.getItem("csrfToken"));
-  console.log("----csrfToken-->", csrfToken.csrf_token);
-
   const [apiData, setApiData] = useState([]);
 
   let token =
-    "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImFmODU2ZDA0LWFjZDAtNDU2NC1iYjBjLWJlMjk0NGY3MWQ5MiIsInN1YiI6InNydWphbkB3aW5wb3dlcmRpcmVjdC5jby51ayIsImVtYWlsIjoic3J1amFuQHdpbnBvd2VyZGlyZWN0LmNvLnVrIiwianRpIjoiOGFhZjZmYmMtNmQ1Yy00ZWJlLWFhMDMtMWM2MTJjMDhiYzkzIiwibmJmIjoxNzAxMTY0ODQ3LCJleHAiOjE3MDExNjUxNDcsImlhdCI6MTcwMTE2NDg0NywiaXNzIjoiRW5lcmd5IExvb2t1cCIsImF1ZCI6Imh0dHBzOi8vYXBpLmxvb2t1cC5FbmVyZ3kifQ.JbdZtALXMcZ3fQDzjNVPvOZ6OdahniESXqk4u08TiCqiLyaD9_i9qf_41IO98dFN8dJexP3yqumONvV3cY26Jw";
+    "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImM1NTUyMTE5LWMwM2ItNDRiYS1hYzFhLTgzNjIwYmEyOTFhNCIsInN1YiI6InNydWphbkB3aW5wb3dlcmRpcmVjdC5jby51ayIsImVtYWlsIjoic3J1amFuQHdpbnBvd2VyZGlyZWN0LmNvLnVrIiwianRpIjoiNTdkZjZlNTEtZGZjYi00NzU4LTgyMDktOGVlNDNkN2NkNzkwIiwibmJmIjoxNzAxODU3MDgyLCJleHAiOjE3MDE4NTczODIsImlhdCI6MTcwMTg1NzA4MiwiaXNzIjoiRW5lcmd5IExvb2t1cCIsImF1ZCI6Imh0dHBzOi8vYXBpLmxvb2t1cC5FbmVyZ3kifQ.OnN8-XZn3GVzbp065a9lUvcAgDtmPGMklZW34r6KmHK_Zp25cukxspeHE6bxXSELbxkCEidkz2pAVn7t8Im41w";
 
   const jsonData = JSON.stringify({
     query: formData.s_postcode,
@@ -39,12 +36,11 @@ const LookUp = () => {
 
   const fetchData = async () => {
     try {
-      let response = await fetch("/api/Property/SearchByPostcode", {
+      let response = await fetch("https://api.lookup.energy/api/Property/SearchByPostcode", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${token}`,
-          "X-CSRFToken": csrfToken.csrf_token,
         },
         body: jsonData,
         redirect: "follow",
