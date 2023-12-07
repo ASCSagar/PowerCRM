@@ -1,63 +1,96 @@
-import React, { useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import NeumorphismWrapper from "../../components/UI/Layouts/NeumorphismWrapper";
 import { Button, Form } from "react-bootstrap";
 import SelectSearch from "react-select-search";
-import { useSelector } from "react-redux";
+import useFetch from "../../hooks/useFetch";
+import { uiAction } from "../../store/uiStore";
+import { useDispatch } from "react-redux";
+
+const initialDetails = {
+  lType: "Company",
+  l_company_search: "",
+  c_name: "",
+  c_number: "",
+  c_name_postcode: "",
+  c_postcode: "",
+  s_postcode: "",
+  s_name_number: "",
+  s_street: "",
+  s_town: "",
+  s_m_bNumber: "",
+  s_e_serialNumber: "",
+  s_g_serialNumber: "",
+  s_mprn: "",
+};
+
+const reducer = (state, action) => {
+  if (action?.reset) {
+    return action.value;
+  }
+  return { ...state, [action.type]: action.value };
+};
 
 const LookUp = () => {
-  const authData = useSelector((state) => state.authStore);
+  const [apiData, dispatchapiData] = useReducer(reducer, initialDetails);
+  const [data, setData] = useState("");
+  const [err, setErr] = useState("");
+  const dispatch = useDispatch();
 
-  const [formData, setFormData] = useState({
-    lType: "Company",
-    l_company_search: "",
-    c_name: "",
-    c_number: "",
-    c_name_postcode: "",
-    c_postcode: "",
-    s_postcode: "",
-    s_name_number: "",
-    s_street: "",
-    s_town: "",
-    s_m_bNumber: "",
-    s_e_serialNumber: "",
-    s_g_serialNumber: "",
-    s_mprn: "",
-  });
+  console.log("---ApiData---->", data);
 
-  const [apiData, setApiData] = useState([]);
-
-  let token =
-    "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImM1NTUyMTE5LWMwM2ItNDRiYS1hYzFhLTgzNjIwYmEyOTFhNCIsInN1YiI6InNydWphbkB3aW5wb3dlcmRpcmVjdC5jby51ayIsImVtYWlsIjoic3J1amFuQHdpbnBvd2VyZGlyZWN0LmNvLnVrIiwianRpIjoiNTdkZjZlNTEtZGZjYi00NzU4LTgyMDktOGVlNDNkN2NkNzkwIiwibmJmIjoxNzAxODU3MDgyLCJleHAiOjE3MDE4NTczODIsImlhdCI6MTcwMTg1NzA4MiwiaXNzIjoiRW5lcmd5IExvb2t1cCIsImF1ZCI6Imh0dHBzOi8vYXBpLmxvb2t1cC5FbmVyZ3kifQ.OnN8-XZn3GVzbp065a9lUvcAgDtmPGMklZW34r6KmHK_Zp25cukxspeHE6bxXSELbxkCEidkz2pAVn7t8Im41w";
+  const [
+    sendReqData,
+    setSendReqData,
+    reqStatus,
+    postcodeData,
+    setPostCodeData,
+  ] = useFetch();
 
   const jsonData = JSON.stringify({
-    query: formData.s_postcode,
+    query: apiData.s_postcode,
     isQueryTicket: true,
   });
 
-  const fetchData = async () => {
-    try {
-      let response = await fetch("https://api.lookup.energy/api/Property/SearchByPostcode", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: jsonData,
-        redirect: "follow",
-      });
-      const data = await response.json();
-      setApiData(data);
-    } catch (error) {
-      console.error("---Error--->", error);
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchData();
+    if (!apiData.s_postcode) {
+      setErr("Site Postcode is Required");
+      return;
+    } else if (err?.length) {
+      setErr("");
+    }
+    setSendReqData({
+      ...sendReqData,
+      url: "lookup/Property/SearchByPostcode/",
+      fetchObj: {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: jsonData,
+      },
+      isAuthNeeded: true,
+      expectStatusCode: [200, 201],
+    });
   };
 
-  console.log("--APIData--->", apiData);
+  useEffect(() => {
+    if (postcodeData) {
+      if (postcodeData.status === 200 || postcodeData.status === 201) {
+        dispatch(
+          uiAction.setNotification({
+            show: true,
+            heading: "Search",
+            msg: "Search Successfull",
+          })
+        );
+        setData(postcodeData?.data);
+        dispatchapiData({ reset: true, value: initialDetails });
+      }
+    }
+  }, [postcodeData]);
+
   return (
     <>
       <NeumorphismWrapper>
@@ -78,8 +111,13 @@ const LookUp = () => {
                     value: "Site",
                   },
                 ]}
-                value={formData.lType}
-                onChange={(val) => setFormData({ ...formData, lType: val })}
+                value={apiData.lType}
+                onChange={(value) =>
+                  dispatchapiData({
+                    type: "lType",
+                    value: value,
+                  })
+                }
               ></SelectSearch>
             </Form.Group>
             <Form.Group className="col-md-3 selectbox">
@@ -88,7 +126,7 @@ const LookUp = () => {
               </Form.Label>
               <SelectSearch
                 options={
-                  formData.lType === "Company"
+                  apiData.lType === "Company"
                     ? [
                         {
                           name: "Company Name",
@@ -130,53 +168,59 @@ const LookUp = () => {
                         },
                       ]
                 }
-                value={formData.l_company_search}
-                onChange={(val) =>
-                  setFormData({ ...formData, l_company_search: val })
+                value={apiData.l_company_search}
+                onChange={(e) =>
+                  dispatchapiData({
+                    type: "l_company_search",
+                    value: e,
+                  })
                 }
               ></SelectSearch>
             </Form.Group>
-            {formData.l_company_search === "c_name" && (
+            {apiData.l_company_search === "c_name" && (
               <Form.Group className="mt-1 col-md-3">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
                   type="text"
                   name="Company Name"
-                  value={formData.c_name}
+                  value={apiData.c_name}
                   onChange={(e) =>
-                    setFormData((prev) => {
-                      return { ...prev, c_name: e.target.value };
+                    dispatchapiData({
+                      type: "c_name",
+                      value: e.target.value,
                     })
                   }
                 />
               </Form.Group>
             )}
-            {formData.l_company_search === "c_number" && (
+            {apiData.l_company_search === "c_number" && (
               <Form.Group className="mt-1 col-md-3">
                 <Form.Label>Number</Form.Label>
                 <Form.Control
                   type="number"
                   name="Company Number"
-                  value={formData.c_number}
+                  value={apiData.c_number}
                   onChange={(e) =>
-                    setFormData((prev) => {
-                      return { ...prev, c_number: e.target.value };
+                    dispatchapiData({
+                      type: "c_number",
+                      value: e.target.value,
                     })
                   }
                 />
               </Form.Group>
             )}
-            {formData.l_company_search === "c_name_postcode" && (
+            {apiData.l_company_search === "c_name_postcode" && (
               <>
                 <Form.Group className="mt-1 col-md-3">
                   <Form.Label>Name</Form.Label>
                   <Form.Control
                     type="text"
                     name="Company Name"
-                    value={formData.c_name_postcode}
+                    value={apiData.c_name_postcode}
                     onChange={(e) =>
-                      setFormData((prev) => {
-                        return { ...prev, c_name_postcode: e.target.value };
+                      dispatchapiData({
+                        type: "c_name_postcode",
+                        value: e.target.value,
                       })
                     }
                   />
@@ -186,42 +230,45 @@ const LookUp = () => {
                   <Form.Control
                     type="text"
                     name="Company Postcode and Name"
-                    value={formData.c_postcode}
+                    value={apiData.c_postcode}
                     onChange={(e) =>
-                      setFormData((prev) => {
-                        return { ...prev, c_postcode: e.target.value };
+                      dispatchapiData({
+                        type: "c_postcode",
+                        value: e.target.value,
                       })
                     }
                   />
                 </Form.Group>
               </>
             )}
-            {formData.l_company_search === "s_postcode" && (
+            {apiData.l_company_search === "s_postcode" && (
               <Form.Group className="mt-1 col-md-3">
                 <Form.Label>Postcode</Form.Label>
                 <Form.Control
                   type="text"
                   name="Site Postcode"
-                  value={formData.s_postcode}
+                  value={apiData.s_postcode}
                   onChange={(e) =>
-                    setFormData((prev) => {
-                      return { ...prev, s_postcode: e.target.value };
+                    dispatchapiData({
+                      type: "s_postcode",
+                      value: e.target.value,
                     })
                   }
                 />
               </Form.Group>
             )}
-            {formData.l_company_search === "s_name_number" && (
+            {apiData.l_company_search === "s_name_number" && (
               <>
                 <Form.Group className="mt-1 col-md-3">
                   <Form.Label>Name/Number</Form.Label>
                   <Form.Control
                     type="text"
                     name="Site Name/Number"
-                    value={formData.s_name_number}
+                    value={apiData.s_name_number}
                     onChange={(e) =>
-                      setFormData((prev) => {
-                        return { ...prev, s_name_number: e.target.value };
+                      dispatchapiData({
+                        type: "s_name_number",
+                        value: e.target.value,
                       })
                     }
                   />
@@ -231,10 +278,11 @@ const LookUp = () => {
                   <Form.Control
                     type="text"
                     name="Site Street"
-                    value={formData.s_street}
+                    value={apiData.s_street}
                     onChange={(e) =>
-                      setFormData((prev) => {
-                        return { ...prev, s_street: e.target.value };
+                      dispatchapiData({
+                        type: "s_street",
+                        value: e.target.value,
                       })
                     }
                   />
@@ -244,79 +292,85 @@ const LookUp = () => {
                   <Form.Control
                     type="text"
                     name="Site Town"
-                    value={formData.s_town}
+                    value={apiData.s_town}
                     onChange={(e) =>
-                      setFormData((prev) => {
-                        return { ...prev, s_town: e.target.value };
+                      dispatchapiData({
+                        type: "s_town",
+                        value: e.target.value,
                       })
                     }
                   />
                 </Form.Group>
               </>
             )}
-            {formData.l_company_search === "s_m_bNumber" && (
+            {apiData.l_company_search === "s_m_bNumber" && (
               <Form.Group className="mt-1 col-md-3">
                 <Form.Label>MPAN Bottom Line</Form.Label>
                 <Form.Control
                   type="number"
                   name="Site MPAN Bottom Line"
-                  value={formData.s_m_bNumber}
+                  value={apiData.s_m_bNumber}
                   onChange={(e) =>
-                    setFormData((prev) => {
-                      return { ...prev, s_m_bNumber: e.target.value };
+                    dispatchapiData({
+                      type: "s_m_bNumber",
+                      value: e.target.value,
                     })
                   }
                 />
               </Form.Group>
             )}
-            {formData.l_company_search === "s_e_serialNumber" && (
+            {apiData.l_company_search === "s_e_serialNumber" && (
               <Form.Group className="mt-1 col-md-3">
                 <Form.Label>Electricity Serial Number</Form.Label>
                 <Form.Control
                   type="number"
                   name="Site Electricity Serial Number"
-                  value={formData.s_e_serialNumber}
+                  value={apiData.s_e_serialNumber}
                   onChange={(e) =>
-                    setFormData((prev) => {
-                      return { ...prev, s_e_serialNumber: e.target.value };
+                    dispatchapiData({
+                      type: "s_e_serialNumber",
+                      value: e.target.value,
                     })
                   }
                 />
               </Form.Group>
             )}
-            {formData.l_company_search === "s_g_serialNumber" && (
+            {apiData.l_company_search === "s_g_serialNumber" && (
               <Form.Group className="mt-1 col-md-3">
                 <Form.Label>Gas Serial Number</Form.Label>
                 <Form.Control
                   type="number"
                   name="Site Gas Serial Number"
-                  value={formData.s_g_serialNumber}
+                  value={apiData.s_g_serialNumber}
                   onChange={(e) =>
-                    setFormData((prev) => {
-                      return { ...prev, s_g_serialNumber: e.target.value };
+                    dispatchapiData({
+                      type: "s_g_serialNumber",
+                      value: e.target.value,
                     })
                   }
                 />
               </Form.Group>
             )}
-            {formData.l_company_search === "s_mprn" && (
+            {apiData.l_company_search === "s_mprn" && (
               <Form.Group className="mt-1 col-md-3">
                 <Form.Label>MPRN</Form.Label>
                 <Form.Control
                   type="number"
                   name="Site MPRN"
-                  value={formData.s_mprn}
+                  value={apiData.s_mprn}
                   onChange={(e) =>
-                    setFormData((prev) => {
-                      return { ...prev, s_mprn: e.target.value };
+                    dispatchapiData({
+                      type: "s_mprn",
+                      value: e.target.value,
                     })
                   }
                 />
               </Form.Group>
             )}
             <div className="mt-3 col-md-12 text-center">
+              {err?.length ? <p className="dengor">{err}</p> : ""}
               <Button onClick={handleSubmit} variant="primary" type="submit">
-                Search
+                {reqStatus.isLoading ? "Searching" : "Search"}
               </Button>
             </div>
           </div>
